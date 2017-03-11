@@ -359,7 +359,7 @@ msgstr "新しいプルリクエストの作成に成功しました"
 #: kallithea/controllers/pullrequests.py:509
 #, python-format
 msgid "Invalid reviewer \"%s\" specified"
-msgstr ""
+msgstr "無効なレビュアー \"%s\" が指定されました"
 
 #: kallithea/controllers/pullrequests.py:369
 #: kallithea/controllers/pullrequests.py:456
@@ -368,28 +368,28 @@ msgstr "プルリクエストの作成中にエラーが発生しました"
 
 #: kallithea/controllers/pullrequests.py:401
 msgid "Missing changesets since the previous pull request:"
-msgstr ""
+msgstr "以前のプルリクエスト以降のチェンジセットがありません:"
 
 #: kallithea/controllers/pullrequests.py:408
 #, python-format
 msgid "New changesets on %s %s since the previous pull request:"
-msgstr ""
+msgstr "以前のプルリクエスト以降の %s %s に関する新しいチェンジセット:"
 
 #: kallithea/controllers/pullrequests.py:415
 msgid "Ancestor didn't change - show diff since previous version:"
-msgstr ""
+msgstr "祖先は変化しなかった - 以前のバージョンからの差分を表示:"
 
 #: kallithea/controllers/pullrequests.py:422
 #, python-format
 msgid ""
 "This pull request is based on another %s revision and there is no simple "
 "diff."
-msgstr ""
+msgstr "このプルリクエストは別の %s リビジョンに基づいており、単純な差分ではありません."
 
 #: kallithea/controllers/pullrequests.py:424
 #, python-format
 msgid "No changes found on %s %s since previous version."
-msgstr ""
+msgstr "以前のバージョン以降、 %s %s に変更は見つかりませんでした。"
 
 #: kallithea/controllers/pullrequests.py:462
 #, python-format
@@ -412,7 +412,7 @@ msgstr "プルリクエストの削除に成功しました"
 #: kallithea/controllers/pullrequests.py:594
 #, python-format
 msgid "This pull request has already been merged to %s."
-msgstr ""
+msgstr "このプルリクエストはすでに %s にマージされています。"
 
 #: kallithea/controllers/pullrequests.py:596
 msgid "This pull request has been closed and can not be updated."
@@ -421,7 +421,7 @@ msgstr "このプルリクエストはすでにクローズされていて、更
 #: kallithea/controllers/pullrequests.py:614
 #, python-format
 msgid "This pull request can be updated with changes on %s:"
-msgstr ""
+msgstr "このプルリクエストは、 %s の変更で更新できます:"
 
 #: kallithea/controllers/pullrequests.py:617
 msgid "No changesets found for updating this pull request."
@@ -1745,39 +1745,39 @@ msgstr "デフォルトユーザーは新しいリポジトリに書き込みア
 
 #: kallithea/model/db.py:1670
 msgid "Default user has admin access to new repositories"
-msgstr ""
+msgstr "デフォルトユーザーは新しいリポジトリに管理者アクセスする権限があります"
 
 #: kallithea/model/db.py:1672
 msgid "Default user has no access to new repository groups"
-msgstr ""
+msgstr "デフォルトユーザーは新しいリポジトリグループにアクセスできません"
 
 #: kallithea/model/db.py:1673
 msgid "Default user has read access to new repository groups"
-msgstr ""
+msgstr "デフォルトユーザーは新しいリポジトリグループに読み取りアクセスする権限があります"
 
 #: kallithea/model/db.py:1674
 msgid "Default user has write access to new repository groups"
-msgstr ""
+msgstr "デフォルトユーザーは新しいリポジトリグループに書き込みアクセスする権限があります"
 
 #: kallithea/model/db.py:1675
 msgid "Default user has admin access to new repository groups"
-msgstr ""
+msgstr "デフォルトユーザーは新しいリポジトリグループに管理者アクセスする権限があります"
 
 #: kallithea/model/db.py:1677
 msgid "Default user has no access to new user groups"
-msgstr ""
+msgstr "デフォルトユーザーは新しいユーザーグループにアクセスできません"
 
 #: kallithea/model/db.py:1678
 msgid "Default user has read access to new user groups"
-msgstr ""
+msgstr "デフォルトユーザーは新しいユーザーグループに読み取りアクセスする権限があります"
 
 #: kallithea/model/db.py:1679
 msgid "Default user has write access to new user groups"
-msgstr ""
+msgstr "デフォルトユーザーは新しいユーザーグループに書き込みアクセスする権限があります"
 
 #: kallithea/model/db.py:1680
 msgid "Default user has admin access to new user groups"
-msgstr ""
+msgstr "デフォルトユーザーは新しいユーザーグループに書き込みアクセスする権限があります"
 
 #: kallithea/model/db.py:1682
 msgid "Only admins can create repository groups"
@@ -1912,7 +1912,7 @@ msgstr "%(user)s がプルリクエストにコメント %(when)s"
 #: kallithea/model/notification.py:302
 #, python-format
 msgid "[Comment] %(repo_name)s changeset %(short_id)s on %(branch)s"
-msgstr ""
+msgstr "%(repo_name) の %(branch)s のチェンジセット %(short_id)s に[コメント]"
 
 #: kallithea/model/notification.py:305
 #, python-format
@@ -1920,16 +1920,14 @@ msgid "New user %(new_username)s registered"
 msgstr "新しいユーザー %(new_username)s が登録されました"
 
 #: kallithea/model/notification.py:307
-#, fuzzy, python-format
-#| msgid "%(user)s wants you to review pull request %(pr_nice_id)s:"
+#, python-format
 msgid "[Added] %(repo_name)s pull request %(pr_nice_id)s from %(ref)s"
-msgstr "%(user)s がプリリクエスト #%(pr_id)s: %(pr_title)s のレビューを求めています"
+msgstr "%(ref)s から %(repo_name)s にプルリクエスト #%(pr_nice_id)s が[追加]されました"
 
 #: kallithea/model/notification.py:308
-#, fuzzy, python-format
-#| msgid "[commented] on pull request for"
+#, python-format
 msgid "[Comment] %(repo_name)s pull request %(pr_nice_id)s from %(ref)s"
-msgstr "プルリクエストに[コメント]"
+msgstr "%(ref)s から %(repo_name)s にプルリクエストに #%(pr_nice_id)s に[コメント]されました"
 
 #: kallithea/model/notification.py:321
 msgid "Closing"
@@ -1993,7 +1991,7 @@ msgstr "パスワードの再設定通知"
 msgid ""
 "The password to your account %s has been changed using password reset "
 "form."
-msgstr ""
+msgstr "あなたのアカウント %s のパスワードは、パスワードリセットフォームを使用して変更されました"
 
 #: kallithea/model/validators.py:77 kallithea/model/validators.py:78
 msgid "Value cannot be an empty list"
@@ -2104,7 +2102,7 @@ msgstr "無効なリポジトリのURL"
 msgid ""
 "Invalid repository URL. It must be a valid http, https, ssh, svn+http or "
 "svn+https URL"
-msgstr ""
+msgstr "無効なリポジトリのURLです。有効な http, https, ssh, svn+http または svn+https のURLでなければなりません"
 
 #: kallithea/model/validators.py:489
 msgid "Fork has to be the same type as parent"
@@ -2169,7 +2167,7 @@ msgstr "%(loaded)s プラグインと %(next_to_load)s プラグインで同じ�
 
 #: kallithea/templates/about.html:4 kallithea/templates/about.html:17
 msgid "About"
-msgstr ""
+msgstr "アバウト"
 
 #: kallithea/templates/index.html:5
 msgid "Dashboard"
@@ -5636,7 +5634,7 @@ msgstr "%s プルリクエスト %s"
 #: kallithea/templates/pullrequests/pullrequest_show.html:10
 #, fuzzy, python-format
 msgid "Pull request %s from %s#%s"
-msgstr "%s からのプルリクエスト"
+msgstr "%s#%s からのプルリクエスト %s"
 
 #: kallithea/templates/pullrequests/pullrequest_show.html:57
 msgid "Summarize the changes"
