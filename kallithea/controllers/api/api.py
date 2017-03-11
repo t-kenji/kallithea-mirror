@@ -42,6 +42,9 @@ from kallithea.lib.utils2 import (
     str2bool, time_to_datetime, safe_int, Optional, OAttr)
 from kallithea.model.meta import Session
 from kallithea.model.repo_group import RepoGroupModel
+from kallithea.model.comment import ChangesetCommentsModel
+from kallithea.model.changeset_status import ChangesetStatusModel
+from kallithea.model.pull_request import PullRequestModel
 from kallithea.model.scm import ScmModel, UserGroupList
 from kallithea.model.repo import RepoModel
 from kallithea.model.user import UserModel
@@ -49,7 +52,7 @@ from kallithea.model.user_group import UserGroupModel
 from kallithea.model.gist import GistModel
 from kallithea.model.db import (
     Repository, Setting, UserIpMap, Permission, User, Gist,
-    RepoGroup)
+    RepoGroup, ChangesetStatus)
 from kallithea.lib.compat import json
 from kallithea.lib.exceptions import (
     DefaultUserException, UserGroupsAssignedException)
@@ -142,6 +145,21 @@ def get_gist_or_error(gistid):
         raise JSONRPCError('gist `%s` does not exist' % (gistid,))
     return gist
 
+def get_pull_request_or_error(pullrequestid):
+    """
+    Get pull request by id or return JsonRPCError if not found
+
+    :param pullrequestid:
+    """
+
+    try:
+        pull_request = PullRequestModel().get(int(pullrequestid))
+    except ValueError:
+        raise JSONRPCError('pullrequestid must be an integer')
+    if not pull_request:
+        raise JSONRPCError('pull_request `%s` does not exist' % (
+            pullrequestid,))
+    return pull_request
 
 class ApiController(JSONRPCController):
     """
@@ -2630,3 +2648,124 @@ class ApiController(JSONRPCController):
             log.error(traceback.format_exc())
             raise JSONRPCError('failed to delete gist ID:%s'
                                % (gist.gist_access_id,))
+
+    def comment_pull_request(self, apiuser, repoid, pullrequestid, commit_id=Optional(None),
+                             filepath=Optional(None), lineno=Optional(None),
+                             message=Optional(None), status=Optional(None), userid=Optional(OAttr('apiuser'))):
+        """
+        Comment on the pull request specified with the `pullrequestid`,
+        in the |repo| specified by the `repoid`, and optionally change the
+        review status.
+
+        :param apiuser: This is filled automatically from the |authtoken|.
+        :type apiuser: AuthUser
+        :param repoid: The repository name or repository ID.
+        :type repoid: str or int
+        :param pullrequestid: The pull request ID.
+        :type pullrequestid: int
+        :param commit_id: Specify the commit_id for which to set a comment. If
+            given commit_id is different than latest in the PR status
+            change won't be performed.
+        :type commit_id: str
+        :param filepath: File path of comment.
+        :type filepath: Optional(str), default: 'none'
+        :param lineno: Line of comment.
+        :type lineno: Optional(str), default: 'none'
+        :param message: The text content of the comment.
+        :type message: str
+        :param status: (**Optional**) Set the approval status of the pull
+            request. One of: 'not_reviewed', 'approved', 'rejected',
+            'under_review'
+        :type status: str
+        :param userid: Comment on the pull request as this user
+        :type userid: Optional(str or int)
+
+        Example output:
+
+        .. code-block:: bash
+
+          id : <id_given_in_input>
+          result :
+            {
+                "pull_request_id":  "<Integer>",
+                "comment_id":       "<Integer>",
+                "status": {"given": <given_status>,
+                           "was_changed": <bool status_was_actually_changed> },
+            }
+          error :  null
+        """
+        repo = get_repo_or_error(repoid)
+        if not isinstance(userid, Optional):
+            if HasRepoPermissionAnyApi('repository.admin')(
+                    user=apiuser, repo_name=repo.repo_name):
+                apiuser = get_user_or_error(userid)
+            else:
+                raise JSONRPCError('userid is not the same as your user')
+
+        pull_request = get_pull_request_or_error(pullrequestid)
+        if not PullRequestModel().check_user_read(
+                pull_request, apiuser, api=True):
+            raise JSONRPCError('repository `%s` does not exist' % (repoid,))
+        message = Optional.extract(message)
+        status = Optional.extract(status)
+        commit_id = Optional.extract(commit_id)
+
+        if not message and not status:
+            raise JSONRPCError(
+                    'Both message and status parameters are missing. '
+                    'At least one is required.')
+
+        if (status not in (st[0] for st in ChangesetStatus.STATUSES) and
+                status is not None):
+            raise JSONRPCError('Unknown comment status: `%s`' % status)
+
+        if commit_id and commit_id not in pull_request.revisions:
+            raise JSONRPCError(
+                    'Invalid commit_id `%s` for this pull request.' % commit_id)
+
+        allowed_to_change_status = PullRequestModel().check_user_change_status(
+                pull_request, apiuser)
+
+        # if commit_id is passed re-validated if user is allowed to change status
+        # based on latest commit_id from the PR
+        if commit_id:
+            commit_idx = pull_request.revisions.index(commit_id)
+            if commit_idx != 0:
+                allowed_to_change_status = False
+
+        text = message
+        status_label = ChangesetStatus.get_status_lbl(status)
+        if status and allowed_to_change_status:
+            st_message = ('Status change %(transition_icon)s %(status)s' %
+                    {'transition_icon': '>', 'status': status_label})
+            text = message or st_message
+
+        status_change = status and allowed_to_change_status
+        comment = ChangesetCommentsModel().create(
+                text = text,
+                repo = pull_request.org_repo_id,
+                user = apiuser.user_id,
+                pull_request = pull_request.pull_request_id,
+                f_path = f_path,
+                line_no = line_no,
+                status_change = (status if status_change else None),
+                closing_pr = False,
+                send_email = True,
+        )
+        if allowed_to_change_status and status:
+            ChangesetStatusModel().set_status(
+                    pull_request.org_repo_id,
+                    status,
+                    apiuser.user_id,
+                    comment,
+                    pull_request = pull_request.pull_request_id
+            )
+            Session().flush()
+
+        Session().commit()
+        data = {
+                'pull_request_id': pull_request.pull_request_id,
+                'comment_id': comment.comment_id if comment else None,
+                'status': {'given': status, 'was_changed': status_change},
+        }
+        return data

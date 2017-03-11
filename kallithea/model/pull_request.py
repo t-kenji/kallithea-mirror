@@ -50,6 +50,36 @@ class PullRequestModel(BaseModel):
     def __get_pull_request(self, pull_request):
         return self._get_instance(PullRequest, pull_request)
 
+    def _check_perms(self, perms, pull_request, user, api=False):
+        if not api:
+            return h.HasRepoPermissionAny(*perms)(
+                    user=user, repo_name=pull_request.other_repo.repo_name)
+        else:
+            return h.HasRepoPermissionAnyApi(*perms)(
+                    user=user, repo_name=pull_request.other_repo.repo_name)
+
+    def check_user_read(self, pull_request, user, api=False):
+        _perms = ('repository.admin', 'repository.write', 'repository.read',)
+        return self._check_perms(_perms, pull_request, user, api)
+
+    def check_user_merge(self, pull_request, user, api=False):
+        _perms = ('repository.admin', 'repository.write', 'hg.admin',)
+        return self._check_perms(_perms, pull_request, user, api)
+
+    def check_user_update(self, pull_request, user, api=False):
+        owner = user.user_id == pull_request.user_id
+        return self.check_user_merge(pull_request, user, api) or owner
+
+    def check_user_delete(self, pull_request, user):
+        owner = user.user_id == pull_request.user_id
+        _perms = ('repository.admin',)
+        return self._check_perms(_perms, pull_request, user) or owner
+
+    def check_user_change_status(self, pull_request, user, api=False):
+        reviewer = user.user_id in [x.user_id for x in
+                                    pull_request.reviewers]
+        return self.check_user_update(pull_request, user, api) or reviewer
+
     def get_pullrequest_cnt_for_user(self, user):
         return PullRequest.query()\
                                 .join(PullRequestReviewers)\
@@ -70,6 +100,9 @@ class PullRequestModel(BaseModel):
         if not closed:
             q = q.filter(PullRequest.status != PullRequest.STATUS_CLOSED)
         return q.order_by(PullRequest.created_on.desc()).all()
+
+    def get(self, pull_request):
+        return self.__get_pull_request(pull_request)
 
     def create(self, created_by, org_repo, org_ref, other_repo, other_ref,
                revisions, reviewers, title, description=None):
