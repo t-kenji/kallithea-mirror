@@ -630,7 +630,27 @@ class PullrequestsController(BaseRepoController):
                 avail_show = sorted(show, reverse=True)
 
         elif org_scm_instance.alias == 'git':
-            c.update_msg = _("Git pull requests don't support updates yet.")
+            c.a_branch_name = c.a_ref_name
+            if not c.is_range and \
+                    other_scm_instance.get_changeset(c.cs_rev) in \
+                            other_scm_instance.get_changesets(c.a_rev, c.cs_rev, branch_name=c.a_branch_name):
+                c.update_msg = _('This pull request has already been merged to %s.') % c.a_branch_name
+            elif c.pull_request.is_closed():
+                c.update_msg = _('This pull request has been closed and can not be updated.')
+            else: # look for descendants of PR head on source branch in org repo
+                avail_revs = [rev.revision for rev in \
+                        org_scm_instance.get_changesets(c.cs_rev, branch_name=c.cs_branch_name)]
+                if len(avail_revs) > 1: # more than just revs[0]
+                    # also show changesets that not are descendants but would be merged in
+                    targethead = other_scm_instance.get_changeset(c.a_branch_name).raw_id
+                    show = set([rev for rev in avail_revs])
+                    c.update_msg = _('This pull request can be updated with changes on %s:') % c.cs_branch_name
+                else:
+                    show = set()
+                    avail_revs = set() # drop revs[0]
+                    c.update_msg = _('No changesets found for updating this pull request.')
+
+                avail_show = sorted(show, reverse=True)
 
         c.avail_revs = avail_revs
         c.avail_cs = [org_scm_instance.get_changeset(r) for r in avail_show]
