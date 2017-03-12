@@ -213,3 +213,113 @@ def _pullhook(*args, **kwargs):
     """
     return 0
 PULL_HOOK = _pullhook
+
+
+#==============================================================================
+# CREATE PULLREQUEST HOOK
+#==============================================================================
+
+def _create_pullrequest_hook(*args, **kwargs):
+    """
+    Create pull request hook
+    kwargs available::
+
+      :param pr_title:
+      :param pr_description:
+      :param pr_user_created:
+      :param pr_repo_url:
+      :param pr_url:
+      :param pr_revisions:
+      :param repo_name:
+      :param repo_owners:
+      :param pr_nice_id:
+      :param ref:
+      :param pr_username:
+      :param threading:
+    """
+    return 0
+CREATE_PULLREQUEST_HOOK = _create_pullrequest_hook
+
+
+#==============================================================================
+# ADD CHANGESET COMMENT HOOK
+#==============================================================================
+
+def _add_changeset_comment_hook(*args, **kwargs):
+    """
+    Add changeset comment hook
+    kwargs available::
+
+      :param comment:
+      :param line_no:
+      :param status_change:
+      :param comment_user:
+      :param target_repo:
+      :param comment_url:
+      :param raw_id:
+      :param message:
+      :param repo_name:
+      :param repo_owner:
+      :param short_id:
+      :param branch:
+      :param comment_username:
+      :param threading:
+    """
+    return 0
+ADD_CHANGESET_COMMENT_HOOK = _add_changeset_comment_hook
+
+
+#==============================================================================
+# ADD PULLREQUEST COMMENT HOOK
+#==============================================================================
+
+def _add_pullrequest_comment_hook(*args, **kwargs):
+    """
+    Add pull request comment hook
+    kwargs available::
+
+      :param comment:
+      :param line_no:
+      :param pr_title:
+      :param pr_nice_id:
+      :param pr_owner:
+      :param status_change:
+      :param closing_pr:
+      :param comment_user:
+      :param target_repo:
+      :param comment_url:
+      :param repo_name:
+      :param repo_owners:
+      :param ref:
+      :param comment_username:
+      :param threading:
+    """
+    return 0
+ADD_PULLREQUEST_COMMENT_HOOK = _add_pullrequest_comment_hook
+
+
+#==============================================================================
+# ADD PULLREQUEST REVIEWER HOOK
+#==============================================================================
+
+def _add_pullrequest_reviewer_hook(*args, **kwargs):
+    """
+    Add pull request reviewer hook
+    kwargs available::
+
+      :param pr_title:
+      :param pr_description:
+      :param pr_user_created:
+      :param pr_repo_url:
+      :param pr_url:
+      :param pr_revisions:
+      :param repo_name:
+      :param repo_owners:
+      :param pr_nice_id:
+      :param ref:
+      :param pr_username:
+      :param pr_add_reviewers:
+      :param threading:
+    """
+    return 0
+ADD_PULLREQUEST_REVIEWER_HOOK = _add_pullrequest_reviewer_hook

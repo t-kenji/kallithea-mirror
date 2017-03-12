@@ -146,6 +146,35 @@ class PullRequestModel(BaseModel):
                                  for username in extract_mentioned_users(new.description))
         self.__add_reviewers(created_by_user, new, reviewers, mention_recipients)
 
+        # extension hook call
+        from kallithea import EXTENSIONS
+        callback = getattr(EXTENSIONS, 'CREATE_PULLREQUEST_HOOK', None)
+        if callable(callback):
+            revision_data = [(x.raw_id, x.message)
+                             for x in map(new.org_repo.get_changeset, new.revisions)]
+            threading = ['%s-pr-%s@%s' % (new.other_repo.repo_name,
+                                          new.pull_request_id,
+                                          h.canonical_hostname())]
+            _org_ref_type, org_ref_name, _org_rev = new.org_ref.split(':')
+            _other_ref_type, other_ref_name, _other_rev = new.other_ref.split(':')
+            owners = list(set([ org_repo.user.username, other_repo.user.username ]))
+            kw = {
+                'pr_title': new.title,
+                'pr_description': new.description,
+                'pr_user_created': created_by_user.full_name_and_username,
+                'pr_repo_url': h.canonical_url('summary_home', repo_name=new.other_repo.repo_name),
+                'pr_url': new.url(canonical=True),
+                'pr_revisions': revision_data,
+                'repo_name': new.other_repo.repo_name,
+                'repo_owners': owners,
+                'pr_nice_id': new.nice_id(),
+                'pr_source_branch': org_ref_name,
+                'pr_target_branch': other_ref_name,
+                'pr_username': created_by_user.username,
+                'threading': threading,
+            }
+            callback(**kw)
+
         return new
 
     def __add_reviewers(self, user, pr, reviewers, mention_recipients=None):
@@ -193,6 +222,34 @@ class PullRequestModel(BaseModel):
                                        recipients=reviewers,
                                        type_=Notification.TYPE_PULL_REQUEST,
                                        email_kwargs=email_kwargs)
+
+        # extension hook call
+        from kallithea import EXTENSIONS
+        callback = getattr(EXTENSIONS, 'ADD_PULLREQUEST_REVIEWER_HOOK', None)
+        if callable(callback) and reviewers:
+            reviewers_names = []
+            for u in reviewers:
+                obj = self._get_user(u)
+                if obj is not None:
+                    reviewers_names.append(obj.username)
+            reviewers_names = set(reviewers_names)
+
+            kw = {
+                'pr_title': pr.title,
+                'pr_description': pr.description,
+                'pr_user_created': user.full_name_and_username,
+                'pr_repo_url': h.canonical_url('summary_home', repo_name=pr.other_repo.repo_name),
+                'pr_url': pr_url,
+                'pr_revisions': revision_data,
+                'repo_name': pr.other_repo.repo_name,
+                'pr_nice_id': pr.nice_id(),
+                'pr_source_branch': org_ref_name,
+                'pr_target_branch': other_ref_name,
+                'pr_username': user.username,
+                'pr_add_reviewers': list(reviewers_names),
+                'threading': threading
+            }
+            callback(**kw)
 
         if mention_recipients:
             mention_recipients.discard(None)

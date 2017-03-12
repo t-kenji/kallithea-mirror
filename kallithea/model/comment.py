@@ -193,6 +193,83 @@ class ChangesetCommentsModel(BaseModel):
         Session().flush()
 
         if send_email:
+            # extension hook call
+            from kallithea import EXTENSIONS
+            if revision:
+                callback = getattr(EXTENSIONS, 'ADD_CHANGESET_COMMENT_HOOK', None)
+                if callable(callback):
+                    line = ''
+                    if line_no:
+                        line = _('on line %s') % line_no
+
+                    cs = repo.scm_instance.get_changeset(revision)
+                    desc = cs.short_id
+
+                    threading = ['%s-rev-%s@%s' % (repo.repo_name, revision, h.canonical_hostname())]
+                    if line_no: # TODO: url to file _and_ line number
+                        threading.append('%s-rev-%s-line-%s@%s' % (repo.repo_name, revision, line_no,
+                                                                   h.canonical_hostname()))
+                    comment_url = h.canonical_url('changeset_home',
+                                                  repo_name=repo.repo_name,
+                                                  revision=revision,
+                                                  anchor='comment-%s' % comment.comment_id)
+                    headline = 'add comment to changeset: %(desc)s %(line)s' % \
+                                   {'desc': desc, 'line': line}
+                    kw = {
+                        'comment': text,
+                        'line_no': line_no,
+                        'status_change': status_change,
+                        'comment_user': user.full_name_and_username,
+                        'target_repo': h.canonical_url('summary_home', repo_name=repo.repo_name),
+                        'comment_url': comment_url,
+                        'raw_id': revision,
+                        'message': cs.message,
+                        'repo_name': repo.repo_name,
+                        'repo_owner': repo.user.username,
+                        'short_id': h.short_id(revision),
+                        'branch': cs.branch,
+                        'comment_username': user.username,
+                        'threading': threading,
+                    }
+                    callback(**kw)
+            else:
+                callback = getattr(EXTENSIONS, 'ADD_PULLREQUEST_COMMENT_HOOK', None)
+                if callable(callback):
+                    line = ''
+                    if line_no:
+                        line = _('on line %s') % line_no
+
+                    _org_ref_type, org_ref_name, _org_rev = comment.pull_request.org_ref.split(':')
+                    threading = ['%s-pr-%s@%s' % (pull_request.other_repo.repo_name,
+                                                  pull_request.pull_request_id,
+                                                  h.canonical_hostname())]
+                    if line_no: # TODO: url to file _and_ line number
+                        threading.append('%s-pr-%s-line-%s@%s' % (pull_request.other_repo.repo_name,
+                                                                  pull_request.pull_request_id, line_no,
+                                                                  h.canonical_hostname()))
+                    comment_url = pull_request.url(canonical=True,
+                                                   anchor='comment-%s' % comment.comment_id)
+                    owners = list(set([ pull_request.org_repo.user.username, pull_request.other_repo.user.username ]))
+                    kw = {
+                        'comment': text,
+                        'line_no': line_no,
+                        'pr_title': pull_request.title,
+                        'pr_nice_id': pull_request.nice_id(),
+                        'pr_owner': pull_request.owner.username,
+                        'status_change': status_change,
+                        'closing_pr': closing_pr,
+                        'comment_user': user.full_name_and_username,
+                        'target_repo': h.canonical_url('summary_home',
+                                                       repo_name=pull_request.other_repo.repo_name),
+                        'comment_url': comment_url,
+                        'repo_name': pull_request.other_repo.repo_name,
+                        'repo_owners': owners,
+                        'ref': org_ref_name,
+                        'comment_username': user.username,
+                        'threading': threading,
+                    }
+                    callback(**kw)
+
             (subj, body, recipients, notification_type,
              email_kwargs) = self._get_notification_data(
                                 repo, comment, user,
