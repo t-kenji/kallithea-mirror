@@ -402,21 +402,21 @@ class PullrequestsController(BaseRepoController):
             for r in old_pull_request.revisions:
                 if r in lost:
                     rev_desc = org_repo.get_changeset(r).message.split('\n')[0]
-                    infos.append('  %s "%s"' % (h.short_id(r), rev_desc))
+                    infos.append('  %s "%s"' % (r, rev_desc))
 
         if new_revisions:
             infos.append(_('New changesets on %s %s since the previous pull request:') % (org_ref_type, org_ref_name))
             for r in reversed(revisions):
                 if r in new_revisions:
                     rev_desc = org_repo.get_changeset(r).message.split('\n')[0]
-                    infos.append('  %s %s' % (h.short_id(r), h.shorter(rev_desc, 80)))
+                    infos.append('  %s %s' % (r, h.shorter(rev_desc, 80)))
 
             if ancestor_rev == other_rev:
                 infos.append(_("Ancestor didn't change - show diff since previous version:"))
                 infos.append(h.canonical_url('compare_url',
                                  repo_name=org_repo.repo_name, # other_repo is always same as repo_name
-                                 org_ref_type='rev', org_ref_name=h.short_id(org_rev), # use old org_rev as base
-                                 other_ref_type='rev', other_ref_name=h.short_id(new_org_rev),
+                                 org_ref_type='rev', org_ref_name=org_rev, # use old org_rev as base
+                                 other_ref_type='rev', other_ref_name=new_org_rev,
                                  )) # note: linear diff, merge or not doesn't matter
             else:
                 infos.append(_('This pull request is based on another %s revision and there is no simple diff.') % other_ref_name)
