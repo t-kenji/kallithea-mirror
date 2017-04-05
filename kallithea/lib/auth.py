@@ -126,7 +126,7 @@ class KallitheaCrypto(object):
             return hashlib.sha256(password).hexdigest() == hashed
         elif is_unix:
             import bcrypt
-            return bcrypt.hashpw(safe_str(password), safe_str(hashed)) == hashed
+            return bcrypt.checkpw(safe_str(password), safe_str(hashed))
         else:
             raise Exception('Unknown or unsupported platform %s' \
                             % __platform__)
