@@ -27,8 +27,8 @@ from kallithea.lib.vcs.backends.base import BaseRepository, CollectionGenerator
 from kallithea.lib.vcs.conf import settings
 
 from kallithea.lib.vcs.exceptions import (
-    BranchDoesNotExistError, ChangesetDoesNotExistError, EmptyRepositoryError,
-    RepositoryError, TagAlreadyExistError, TagDoesNotExistError
+    BranchDoesNotExistError, ChangesetDoesNotExistError, ChangesetHasMultipleCandidatesError, 
+    EmptyRepositoryError, RepositoryError, TagAlreadyExistError, TagDoesNotExistError,
 )
 from kallithea.lib.vcs.utils import safe_unicode, makedate, date_fromtimestamp
 from kallithea.lib.vcs.utils.lazy import LazyProperty
@@ -296,12 +296,23 @@ class GitRepository(BaseRepository):
             if _ref_revision:  # and _ref_revision[1] in ['H', 'RH', 'T']:
                 return _ref_revision[0]
 
+            if not SHA_PATTERN.match(revision):
+                msg = ("Revision %s does not exist for %s" % (revision, self))
+                log.error('msg1: {}'.format(msg))
+                raise ChangesetDoesNotExistError(msg)
+
             _tags_shas = self.tags.values()
             # maybe it's a tag ? we don't have them in self.revisions
-            if revision in _tags_shas:
-                return _tags_shas[_tags_shas.index(revision)]
+            commits = list(set((_tags_shas or []) + (self.revisions or [])))
+            matches = [commit for commit in commits if commit.startswith(revision)]
+            if matches:
+                if len(matches) == 1:
+                    return matches[0]
+                else:
+                    msg = ("Revision {} has multiple candidates {}".format(revision, matches))
+                    raise ChangesetHasMultipleCandidatesError(msg)
 
-            elif not SHA_PATTERN.match(revision) or revision not in self.revisions:
+            else:
                 msg = ("Revision %s does not exist for %s" % (revision, self))
                 raise ChangesetDoesNotExistError(msg)
 
