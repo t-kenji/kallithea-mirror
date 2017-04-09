@@ -46,6 +46,10 @@ class ChangesetDoesNotExistError(ChangesetError):
     pass
 
 
+class ChangesetHasMultipleCandidatesError(ChangesetError):
+    pass
+
+
 class CommitError(RepositoryError):
     pass
 

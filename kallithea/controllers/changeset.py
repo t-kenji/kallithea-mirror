@@ -37,7 +37,7 @@ from pylons.controllers.util import redirect
 from kallithea.lib.utils import jsonify
 
 from kallithea.lib.vcs.exceptions import RepositoryError, \
-    ChangesetDoesNotExistError
+    ChangesetDoesNotExistError, ChangesetHasMultipleCandidatesError
 
 from kallithea.lib.compat import json
 import kallithea.lib.helpers as h
@@ -210,6 +210,12 @@ class ChangesetController(BaseRepoController):
         except(ChangesetDoesNotExistError,), e:
             log.debug(traceback.format_exc())
             msg = _('Such revision does not exist for this repository')
+            h.flash(msg, category='error')
+            raise HTTPNotFound()
+
+        except(ChangesetHasMultipleCandidatesError,), e:
+            log.debug(traceback.format_exc())
+            msg = _('Such revision has multiple candidates for this repository')
             h.flash(msg, category='error')
             raise HTTPNotFound()
 
