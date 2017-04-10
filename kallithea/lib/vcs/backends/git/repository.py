@@ -298,7 +298,6 @@ class GitRepository(BaseRepository):
 
             if not SHA_PATTERN.match(revision):
                 msg = ("Revision %s does not exist for %s" % (revision, self))
-                log.error('msg1: {}'.format(msg))
                 raise ChangesetDoesNotExistError(msg)
 
             _tags_shas = self.tags.values()
