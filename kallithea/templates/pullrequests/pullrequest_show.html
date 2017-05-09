@@ -206,6 +206,16 @@ ${self.repo_context_bar('showpullrequest')}
               <div class="msg-div">${c.update_msg_other}</div>
             </div>
         </div>
+        <div class="field">
+          <div class="label-summary">
+            <label>${_('Download comments')}:</label>
+          </div>
+          <div class="input">
+            <div>
+              <a class="btn btn-small" href="${h.url('pullrequest_export',repo_name=c.repo_name,pull_request_id=c.pull_request.pull_request_id,fname='pullrequest.xlsx')}"><i class="icon-file-zip"></i> ${_('Download as xlsx')}</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     ## REVIEWERS

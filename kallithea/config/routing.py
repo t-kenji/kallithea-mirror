@@ -733,6 +733,11 @@ def make_map(config):
                 controller='pullrequests', action='delete_comment',
                 conditions=dict(function=check_repo, method=["DELETE"]))
 
+    rmap.connect('pullrequest_export',
+                 '/{repo_name:.*?}/pull-request-comment/{pull_request_id}/export/{fname}',
+                controller='pullrequests', action='export',
+                conditions=dict(function=check_repo, method=["GET"]))
+
     rmap.connect('summary_home_summary', '/{repo_name:.*?}/summary',
                 controller='summary', conditions=dict(function=check_repo))
 

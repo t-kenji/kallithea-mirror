@@ -32,7 +32,7 @@ import re
 
 from webob.exc import HTTPNotFound, HTTPForbidden, HTTPBadRequest
 
-from pylons import request, tmpl_context as c, url
+from pylons import request, response, tmpl_context as c, url
 from pylons.controllers.util import redirect
 from pylons.i18n.translation import _
 
@@ -47,7 +47,7 @@ from kallithea.lib import diffs
 from kallithea.lib.exceptions import UserInvalidException
 from kallithea.lib.utils import action_logger, jsonify
 from kallithea.lib.vcs.utils import safe_str
-from kallithea.lib.vcs.exceptions import EmptyRepositoryError, ChangesetDoesNotExistError
+from kallithea.lib.vcs.exceptions import RepositoryError, EmptyRepositoryError, ChangesetDoesNotExistError
 from kallithea.lib.diffs import LimitedDiffContainer
 from kallithea.model.db import PullRequest, ChangesetStatus, ChangesetComment,\
     PullRequestReviewers, User
@@ -824,3 +824,109 @@ class PullrequestsController(BaseRepoController):
             return True
         else:
             raise HTTPForbidden()
+
+    @LoginRequired()
+    @NotAnonymous()
+    @HasRepoPermissionAnyDecorator('repository.read', 'repository.write',
+                                   'repository.admin')
+    def export(self, repo_name, pull_request_id, fname):
+        import os
+        from tempfile import mkstemp
+        from openpyxl import Workbook
+        from openpyxl.writer.excel import save_virtual_workbook
+
+        ext = fname.split('.')[1]
+        export_name = '%s-%s.%s' % (safe_str(repo_name.replace('/', '_')),
+                                   safe_str(pull_request_id), safe_str(ext))
+        fd, export_path = mkstemp()
+        log.debug('Creating new temp export in {path}'.format(path=export_path))
+
+        try:
+            pr = PullRequest.get(pull_request_id)
+            if repo_name != pr.other_repo.repo_name:
+                raise RepositoryError
+        except Exception as e:
+            log.error(e)
+            return _('Pull request #{id} not found').format(id=pull_request_id)
+        log.info('pr: {}'.format(pr))
+
+        cc_model = ChangesetCommentsModel()
+        inline_comments = cc_model.get_inline_comments(
+                            c.db_repo.repo_id,
+                            pull_request=pull_request_id)
+        file_comments = {}
+        for f_path, lines in inline_comments:
+            file_comments[f_path] = lines
+        sorted_file_comments_by_name = sorted(file_comments.items(), key=lambda x:x[0], reverse=False)
+        general_comments = cc_model.get_comments(c.db_repo.repo_id,
+                                         pull_request=pull_request_id)
+
+        wb = Workbook()
+        ws = wb.create_sheet('comments', 0)
+        ws['A1'].value = _('File path')
+        ws['B1'].value = _('Comment ID')
+        ws['C1'].value = _('Line no (old)')
+        ws['D1'].value = _('Line no (new)')
+        ws['E1'].value = _('Author')
+        ws['F1'].value = _('Status')
+        ws['G1'].value = _('Comment')
+        ws['H1'].value = _('Retouch')
+        ws['I1'].value = _('Priority')
+        ws['J1'].value = _('Deadline')
+
+        cols = 2
+        for f_path, lines in sorted_file_comments_by_name:
+            sorted_inline_comments_by_lineno = sorted(lines.iteritems(), key=lambda (line_no,comments):int(line_no[1:]), reverse=False)
+            base_cols = cols
+            for line_no, comments in sorted_inline_comments_by_lineno:
+                for co in comments:
+                    link = pr.url(canonical=True, anchor='comment-{id}'.format(id=co.comment_id))
+                    ws['B{col}'.format(col=cols)].value = co.comment_id
+                    ws['B{col}'.format(col=cols)].hyperlink = link
+                    if co.line_no.startswith('o'):
+                        ws['C{col}'.format(col=cols)].value = co.line_no[1:]
+                    else:
+                        ws['D{col}'.format(col=cols)].value = co.line_no[1:]
+                    ws['E{col}'.format(col=cols)].value = co.author.username
+                    ws['F{col}'.format(col=cols)].value = str(h.changeset_status_lbl(co.status_change[0].status if co.status_change else 'not_reviewed'))
+                    ws['G{col}'.format(col=cols)].value = co.text
+                    cols += 1
+            ws.merge_cells('A{start}:A{end}'.format(start=base_cols, end=cols-1))
+            for i in range(cols-base_cols):
+                ws['A{col}'.format(col=base_cols+i)].value = f_path
+
+        ws['A{col}'.format(col=cols)].value = 'General'
+        base_cols = cols
+        for co in general_comments:
+            link = pr.url(canonical=True, anchor='comment-{id}'.format(id=co.comment_id))
+            ws['B{col}'.format(col=cols)].value = co.comment_id
+            ws['B{col}'.format(col=cols)].hyperlink = link
+            ws['E{col}'.format(col=cols)].value = co.author.username
+            ws['F{col}'.format(col=cols)].value = str(h.changeset_status_lbl(co.status_change[0].status if co.status_change else 'not_reviewed'))
+            ws['G{col}'.format(col=cols)].value = co.text
+            cols += 1
+        ws.merge_cells('A{start}:A{end}'.format(start=base_cols, end=cols-1))
+        for i in range(cols-base_cols):
+            ws['A{col}'.format(col=base_cols+i)].value = 'General'
+
+        with os.fdopen(fd, 'wb') as s:
+            s.write(save_virtual_workbook(wb))
+
+        def get_chunked_export(export_path):
+            stream = open(export_path, 'rb')
+            while True:
+                data = stream.read(16 * 1024)
+                if not data:
+                    break
+                yield data
+            stream.close()
+            log.debug('Destroying temp export %s', export_path)
+            os.remove(export_path)
+
+        action_logger(self.authuser,
+                      'user_exported_pull_request:%s' % pull_request_id,
+                      repo_name, self.ip_addr, self.sa, True)
+
+        response.content_disposition = str('attachment; filename=%s' % (export_name))
+        response.content_type = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        return get_chunked_export(export_path)
