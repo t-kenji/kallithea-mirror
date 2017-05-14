@@ -3446,7 +3446,7 @@ msgstr "リモートリポジトリをクローン"
 msgid ""
 "Optional: URL of a remote repository. If set, the repository will be "
 "created as a clone from this URL."
-msgstr ""
+msgstr "オプション: リモートリポジトリのURLです。設定した場合、このURLからクローンとして作成されます。"
 
 #: kallithea/templates/admin/repos/repo_add_base.html:32
 #: kallithea/templates/admin/repos/repo_edit_settings.html:69
@@ -5183,7 +5183,7 @@ msgstr "作成中"
 #: kallithea/templates/email_templates/changeset_comment.html:5
 #, python-format
 msgid "Comment from %s on %s changeset %s mentioned you"
-msgstr ""
+msgstr "あなたがメンションされた%sから%sのチェンジセット%sに対するコメント"
 
 #: kallithea/templates/email_templates/changeset_comment.html:7
 #, python-format
