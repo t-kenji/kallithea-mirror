@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Kallithea 0.3.2\n"
 "Report-Msgid-Bugs-To: translations@kallithea-scm.org\n"
-"POT-Creation-Date: 2017-04-09 08:21+0000\n"
+"POT-Creation-Date: 2017-05-14 19:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -116,8 +116,8 @@ msgstr ""
 #: kallithea/templates/changeset/changeset.html:195
 #: kallithea/templates/compare/compare_diff.html:78
 #: kallithea/templates/compare/compare_diff.html:89
-#: kallithea/templates/pullrequests/pullrequest_show.html:339
-#: kallithea/templates/pullrequests/pullrequest_show.html:363
+#: kallithea/templates/pullrequests/pullrequest_show.html:349
+#: kallithea/templates/pullrequests/pullrequest_show.html:373
 msgid "Changeset was too big and was cut off..."
 msgstr ""
 
@@ -397,39 +397,101 @@ msgstr ""
 msgid "Successfully deleted pull request"
 msgstr ""
 
-#: kallithea/controllers/pullrequests.py:595
-#: kallithea/controllers/pullrequests.py:637
+#: kallithea/controllers/pullrequests.py:600
+#: kallithea/controllers/pullrequests.py:642
 #, python-format
 msgid "This pull request has already been merged to %s."
 msgstr ""
 
-#: kallithea/controllers/pullrequests.py:597
-#: kallithea/controllers/pullrequests.py:639
+#: kallithea/controllers/pullrequests.py:602
+#: kallithea/controllers/pullrequests.py:644
 msgid "This pull request has been closed and can not be updated."
 msgstr ""
 
-#: kallithea/controllers/pullrequests.py:615
-#: kallithea/controllers/pullrequests.py:647
+#: kallithea/controllers/pullrequests.py:620
+#: kallithea/controllers/pullrequests.py:652
 #, python-format
 msgid "This pull request can be updated with changes on %s:"
 msgstr ""
 
-#: kallithea/controllers/pullrequests.py:619
-#: kallithea/controllers/pullrequests.py:651
+#: kallithea/controllers/pullrequests.py:624
+#: kallithea/controllers/pullrequests.py:656
 msgid "No changesets found for updating this pull request."
 msgstr ""
 
-#: kallithea/controllers/pullrequests.py:627
+#: kallithea/controllers/pullrequests.py:632
 #, python-format
 msgid "Note: Branch %s has another head: %s."
 msgstr ""
 
-#: kallithea/controllers/pullrequests.py:744
+#: kallithea/controllers/pullrequests.py:660
+#, python-format
+msgid "Error: revision %s was not found. Please create a new pull request!"
+msgstr ""
+
+#: kallithea/controllers/pullrequests.py:685
+msgid "The diff can't be shown - the PR revisions could not be found."
+msgstr ""
+
+#: kallithea/controllers/pullrequests.py:754
 msgid "No permission to change pull request status"
 msgstr ""
 
-#: kallithea/controllers/pullrequests.py:749
+#: kallithea/controllers/pullrequests.py:759
 msgid "Closing."
+msgstr ""
+
+#: kallithea/controllers/pullrequests.py:850
+msgid "Pull request #{id} not found"
+msgstr ""
+
+#: kallithea/controllers/pullrequests.py:866
+msgid "File path"
+msgstr ""
+
+#: kallithea/controllers/pullrequests.py:867
+msgid "Comment ID"
+msgstr ""
+
+#: kallithea/controllers/pullrequests.py:868
+msgid "Line no (old)"
+msgstr ""
+
+#: kallithea/controllers/pullrequests.py:869
+msgid "Line no (new)"
+msgstr ""
+
+#: kallithea/controllers/pullrequests.py:870
+#: kallithea/templates/bookmarks/bookmarks.html:53
+#: kallithea/templates/bookmarks/bookmarks_data.html:10
+#: kallithea/templates/branches/branches.html:53
+#: kallithea/templates/branches/branches_data.html:10
+#: kallithea/templates/changelog/changelog_summary_data.html:10
+#: kallithea/templates/tags/tags.html:53
+#: kallithea/templates/tags/tags_data.html:10
+msgid "Author"
+msgstr ""
+
+#: kallithea/controllers/pullrequests.py:871
+msgid "Status"
+msgstr ""
+
+#: kallithea/controllers/pullrequests.py:872
+#: kallithea/templates/changeset/changeset_file_comment.html:80
+#: kallithea/templates/changeset/changeset_file_comment.html:190
+msgid "Comment"
+msgstr ""
+
+#: kallithea/controllers/pullrequests.py:873
+msgid "Retouch"
+msgstr ""
+
+#: kallithea/controllers/pullrequests.py:874
+msgid "Priority"
+msgstr ""
+
+#: kallithea/controllers/pullrequests.py:875
+msgid "Deadline"
 msgstr ""
 
 #: kallithea/controllers/search.py:135
@@ -1187,7 +1249,7 @@ msgstr ""
 
 #: kallithea/lib/helpers.py:1129
 #: kallithea/templates/compare/compare_diff.html:65
-#: kallithea/templates/pullrequests/pullrequest_show.html:326
+#: kallithea/templates/pullrequests/pullrequest_show.html:336
 msgid "No files"
 msgstr ""
 
@@ -2253,7 +2315,7 @@ msgstr ""
 #: kallithea/templates/admin/user_groups/user_groups.html:50
 #: kallithea/templates/pullrequests/pullrequest_data.html:16
 #: kallithea/templates/pullrequests/pullrequest_show.html:156
-#: kallithea/templates/pullrequests/pullrequest_show.html:233
+#: kallithea/templates/pullrequests/pullrequest_show.html:243
 #: kallithea/templates/summary/summary.html:134
 msgid "Owner"
 msgstr ""
@@ -4504,16 +4566,6 @@ msgstr ""
 msgid "Compare Bookmarks"
 msgstr ""
 
-#: kallithea/templates/bookmarks/bookmarks.html:53
-#: kallithea/templates/bookmarks/bookmarks_data.html:10
-#: kallithea/templates/branches/branches.html:53
-#: kallithea/templates/branches/branches_data.html:10
-#: kallithea/templates/changelog/changelog_summary_data.html:10
-#: kallithea/templates/tags/tags.html:53
-#: kallithea/templates/tags/tags_data.html:10
-msgid "Author"
-msgstr ""
-
 #: kallithea/templates/bookmarks/bookmarks.html:54
 #: kallithea/templates/bookmarks/bookmarks_data.html:12
 #: kallithea/templates/branches/branches.html:54
@@ -4742,7 +4794,7 @@ msgstr ""
 
 #: kallithea/templates/changeset/changeset.html:166
 #: kallithea/templates/compare/compare_diff.html:54
-#: kallithea/templates/pullrequests/pullrequest_show.html:318
+#: kallithea/templates/pullrequests/pullrequest_show.html:328
 #, python-format
 msgid "%s file changed"
 msgid_plural "%s files changed"
@@ -4751,7 +4803,7 @@ msgstr[1] ""
 
 #: kallithea/templates/changeset/changeset.html:168
 #: kallithea/templates/compare/compare_diff.html:56
-#: kallithea/templates/pullrequests/pullrequest_show.html:320
+#: kallithea/templates/pullrequests/pullrequest_show.html:330
 #, python-format
 msgid "%s file changed with %s insertions and %s deletions"
 msgid_plural "%s files changed with %s insertions and %s deletions"
@@ -4760,8 +4812,8 @@ msgstr[1] ""
 
 #: kallithea/templates/changeset/changeset.html:182
 #: kallithea/templates/changeset/changeset.html:195
-#: kallithea/templates/pullrequests/pullrequest_show.html:339
-#: kallithea/templates/pullrequests/pullrequest_show.html:363
+#: kallithea/templates/pullrequests/pullrequest_show.html:349
+#: kallithea/templates/pullrequests/pullrequest_show.html:373
 msgid "Show full diff anyway"
 msgstr ""
 
@@ -4811,11 +4863,6 @@ msgstr ""
 
 #: kallithea/templates/changeset/changeset_file_comment.html:77
 msgid "Submitting ..."
-msgstr ""
-
-#: kallithea/templates/changeset/changeset_file_comment.html:80
-#: kallithea/templates/changeset/changeset_file_comment.html:190
-msgid "Comment"
 msgstr ""
 
 #: kallithea/templates/changeset/changeset_file_comment.html:82
@@ -4933,7 +4980,7 @@ msgid "Show merge diff"
 msgstr ""
 
 #: kallithea/templates/compare/compare_cs.html:86
-#: kallithea/templates/pullrequests/pullrequest_show.html:310
+#: kallithea/templates/pullrequests/pullrequest_show.html:320
 msgid "Common ancestor"
 msgstr ""
 
@@ -4974,7 +5021,7 @@ msgid "Compare revisions, branches, bookmarks, or tags."
 msgstr ""
 
 #: kallithea/templates/compare/compare_diff.html:47
-#: kallithea/templates/pullrequests/pullrequest_show.html:305
+#: kallithea/templates/pullrequests/pullrequest_show.html:315
 #, python-format
 msgid "Showing %s commit"
 msgid_plural "Showing %s commits"
@@ -5523,39 +5570,47 @@ msgstr ""
 msgid "Current revision - no change"
 msgstr ""
 
-#: kallithea/templates/pullrequests/pullrequest_show.html:213
+#: kallithea/templates/pullrequests/pullrequest_show.html:211
+msgid "Download comments"
+msgstr ""
+
+#: kallithea/templates/pullrequests/pullrequest_show.html:215
+msgid "Download as xlsx"
+msgstr ""
+
+#: kallithea/templates/pullrequests/pullrequest_show.html:223
 msgid "Pull Request Reviewers"
 msgstr ""
 
-#: kallithea/templates/pullrequests/pullrequest_show.html:238
+#: kallithea/templates/pullrequests/pullrequest_show.html:248
 msgid "Remove reviewer"
 msgstr ""
 
-#: kallithea/templates/pullrequests/pullrequest_show.html:250
+#: kallithea/templates/pullrequests/pullrequest_show.html:260
 msgid "Type name of reviewer to add"
 msgstr ""
 
-#: kallithea/templates/pullrequests/pullrequest_show.html:258
+#: kallithea/templates/pullrequests/pullrequest_show.html:268
 msgid "Potential Reviewers"
 msgstr ""
 
-#: kallithea/templates/pullrequests/pullrequest_show.html:261
+#: kallithea/templates/pullrequests/pullrequest_show.html:271
 msgid "Click to add the repository owner as reviewer:"
 msgstr ""
 
-#: kallithea/templates/pullrequests/pullrequest_show.html:284
+#: kallithea/templates/pullrequests/pullrequest_show.html:294
 msgid "Save Changes"
 msgstr ""
 
-#: kallithea/templates/pullrequests/pullrequest_show.html:285
+#: kallithea/templates/pullrequests/pullrequest_show.html:295
 msgid "Save as New Pull Request"
 msgstr ""
 
-#: kallithea/templates/pullrequests/pullrequest_show.html:286
+#: kallithea/templates/pullrequests/pullrequest_show.html:296
 msgid "Cancel Changes"
 msgstr ""
 
-#: kallithea/templates/pullrequests/pullrequest_show.html:296
+#: kallithea/templates/pullrequests/pullrequest_show.html:306
 msgid "Pull Request Content"
 msgstr ""
 
