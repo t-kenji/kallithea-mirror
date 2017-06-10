@@ -135,6 +135,20 @@ sdist.sdist = sdist_new
 # packages
 packages = find_packages(exclude=['ez_setup'])
 
+extra = {}
+
+try:
+    from distutils.command.build import build as _build
+
+    class build(_build):
+        sub_commands = [('compile_catalog', None)] + _build.sub_commands
+
+    extra['cmdclass'] = {
+        'build': build,
+    }
+except:
+    pass
+
 setup(
     name='Kallithea',
     version=__version__,
@@ -189,4 +203,6 @@ setup(
     [nose.plugins]
     pylons = pylons.test:PylonsPlugin
     """,
+
+    **extra
 )
