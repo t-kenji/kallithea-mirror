@@ -16,7 +16,7 @@
           </div>
 
           <span>
-              ${h.age(co.modified_at)}
+              <span class="tooltip" title="${h.fmt_date(co.modified_at)}">${h.age(co.modified_at)}</span>
               %if co.pull_request:
                 ${_('on pull request')}
                 <a href="${co.pull_request.url()}">"${co.pull_request.title or _("No title")}"</a>
