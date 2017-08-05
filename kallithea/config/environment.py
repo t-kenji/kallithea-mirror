@@ -63,6 +63,18 @@ def load_environment(global_conf, app_conf, initial=False,
     # Initialize config with the basic options
     config.init_app(global_conf, app_conf, package='kallithea', paths=paths)
 
+    from pkg_resources import iter_entry_points
+    from kallithea.lib.extensions import avail_exts
+    for entry_point in iter_entry_points(group='kallithea.extensions', name=None):
+        ext = None
+        for k, v in config.items():
+            if k.startswith(entry_point.name) and v in ('enabled', 'True'):
+                if not ext:
+                    ext = entry_point.load()
+                cls = getattr(ext, k.split('.')[-1])
+                if cls:
+                    avail_exts.append(cls())
+
     # store some globals into kallithea
     kallithea.CELERY_ON = str2bool(config['app_conf'].get('use_celery'))
     kallithea.CELERY_EAGER = str2bool(config['app_conf'].get('celery.always.eager'))

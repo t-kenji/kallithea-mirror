@@ -20,6 +20,7 @@ refer to the routes manual at http://routes.groovie.org/docs/
 """
 
 from routes import Mapper
+from kallithea.lib.extensions import avail_exts, IRoute
 
 # prefix for non repository related links needs to be prefixed with `/`
 ADMIN_PREFIX = '/_admin'
@@ -840,5 +841,10 @@ def make_map(config):
     rmap.connect('repo_followers_home', '/{repo_name:.*?}/followers',
                  controller='followers', action='followers',
                  conditions=dict(function=check_repo))
+
+    # call extensions
+    for ext in avail_exts:
+        if isinstance(ext, IRoute):
+            ext.make_map(config, rmap)
 
     return rmap

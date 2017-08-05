@@ -206,6 +206,13 @@ ${self.repo_context_bar('showpullrequest')}
               <div class="msg-div">${c.update_msg_other}</div>
             </div>
         </div>
+        %if hasattr(c, 'ext_props'):
+          %for prop in c.ext_props:
+        <div class="field">
+            <%include file="${prop}"/>
+        </div>
+          %endfor
+        %endif
       </div>
     </div>
     ## REVIEWERS

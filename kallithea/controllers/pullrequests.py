@@ -45,6 +45,7 @@ from kallithea.lib.helpers import Page
 from kallithea.lib import helpers as h
 from kallithea.lib import diffs
 from kallithea.lib.exceptions import UserInvalidException
+from kallithea.lib.extensions import avail_exts, ITemplatePullrequests
 from kallithea.lib.utils import action_logger, jsonify
 from kallithea.lib.vcs.utils import safe_str
 from kallithea.lib.vcs.exceptions import EmptyRepositoryError, ChangesetDoesNotExistError
@@ -66,6 +67,12 @@ log = logging.getLogger(__name__)
 
 
 class PullrequestsController(BaseRepoController):
+
+    def __getattr__(self, attr):
+        for ext in avail_exts:
+            if isinstance(ext, ITemplatePullrequests) and hasattr(ext, attr):
+                return getattr(ext, attr)
+        raise AttributeError
 
     def _get_repo_refs(self, repo, rev=None, branch=None, branch_rev=None):
         """return a structure with repo's interesting changesets, suitable for
@@ -738,6 +745,14 @@ class PullrequestsController(BaseRepoController):
 
         c.as_form = False
         c.ancestor = None # there is one - but right here we don't know which
+
+        c.ext_props = []
+        for ext in avail_exts:
+            if isinstance(ext, ITemplatePullrequests):
+                url = ext.add_property(c)
+                if url:
+                    c.ext_props.append(url)
+
         return render('/pullrequests/pullrequest_show.html')
 
     @LoginRequired()
