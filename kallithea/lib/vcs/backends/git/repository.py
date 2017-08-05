@@ -584,6 +584,15 @@ class GitRepository(BaseRepository):
             revs = reversed(revs)
         return CollectionGenerator(self, revs)
 
+    def get_new_changesets_on_branch(self, branch, startrev):
+        try:
+            changesets = self.get_changesets(start=startrev, branch_name=branch)
+            revs = [ cs.revision for cs in changesets ]
+        except RepositoryError:
+            # Can be raised for empty repositories
+            revs = []
+        return revs
+
     def get_diff(self, rev1, rev2, path=None, ignore_whitespace=False,
                  context=3):
         """
@@ -629,6 +638,25 @@ class GitRepository(BaseRepository):
             if len(parts) > 1:
                 stdout = 'diff ' + parts[1]
         return stdout
+
+    def is_changeset_on_branch(self, rev, branch):
+        """
+        Returns True if rev is on branch
+        """
+        return branch in self.branch_contains(rev)
+
+    def branch_contains(self, rev):
+        """
+        Returns name of branches that contains rev
+        """
+        cmd = [ 'branch', '--contains', rev ]
+        branches = []
+        try:
+            so, se = self.run_git_command(cmd)
+            branches = [ b[2:] for b in so.splitlines() ]
+        except RepositoryError:
+            pass
+        return branches
 
     @LazyProperty
     def in_memory_changeset(self):

@@ -450,7 +450,8 @@ def handle_git_receive(repo_path, revs, env, hook_type):
                            '--reverse', '--pretty=format:%H', '--not']
                     heads = heads.replace(push_ref['ref'], '')
                     for l in heads.splitlines():
-                        cmd.append(l.strip())
+                        if l:
+                            cmd.append(l.strip())
                     git_revs += repo.run_git_command(cmd)[0].splitlines()
 
                 elif push_ref['new_rev'] == EmptyChangeset().raw_id:

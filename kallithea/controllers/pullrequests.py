@@ -163,12 +163,15 @@ class PullrequestsController(BaseRepoController):
                 else:
                     selected = 'tag:null:' + repo.EMPTY_CHANGESET
                     tags.append((selected, 'null'))
-            else:
+            elif repo.branches:
                 if 'master' in repo.branches:
                     selected = 'branch:master:%s' % repo.branches['master']
                 else:
                     k, v = repo.branches.items()[0]
                     selected = 'branch:%s:%s' % (k, v)
+            else:
+                    selected = 'tag:null:' + repo.EMPTY_CHANGESET
+                    tags.append((selected, 'null'))
 
         groups = [(specials, _("Special")),
                   (peers, _("Peer branches")),
@@ -320,7 +323,8 @@ class PullrequestsController(BaseRepoController):
          org_rev) = org_ref.split(':')
         if org_ref_type == 'rev':
             cs = org_repo.scm_instance.get_changeset(org_rev)
-            org_ref = 'branch:%s:%s' % (cs.branch, cs.raw_id)
+            if cs.branch:
+                org_ref = 'branch:%s:%s' % (cs.branch, cs.raw_id)
 
         other_repo_name = _form['other_repo']
         other_ref = _form['other_ref'] # will have symbolic name and head revision
@@ -588,25 +592,30 @@ class PullrequestsController(BaseRepoController):
         c.update_msg = ""
         c.update_msg_other = ""
         try:
-            if org_scm_instance.alias == 'hg' and c.a_ref_name != 'ancestor':
+            if (org_scm_instance.alias == 'hg' and c.a_ref_name != 'ancestor') or org_scm_instance.alias == 'git':
                 if c.cs_ref_type != 'branch':
-                    c.cs_branch_name = org_scm_instance.get_changeset(c.cs_ref_name).branch # use ref_type ?
+                    c.cs_branch_name = org_scm_instance.get_changeset(c.cs_rev).branch # use ref_type ?
                 c.a_branch_name = c.a_ref_name
                 if c.a_ref_type != 'branch':
                     try:
-                        c.a_branch_name = other_scm_instance.get_changeset(c.a_ref_name).branch # use ref_type ?
+                        c.a_branch_name = other_scm_instance.get_changeset(c.a_rev).branch # use ref_type ?
                     except EmptyRepositoryError:
-                        c.a_branch_name = 'null' # not a branch name ... but close enough
+                        if org_scm_instance.alias == 'hg':
+                            c.a_branch_name = 'null' # not a branch name ... but close enough
+                        else:
+                            c.a_branch_name = None # Handled in the 'not created on branch head' block below
                 # candidates: descendants of old head that are on the right branch
                 #             and not are the old head itself ...
                 #             and nothing at all if old head is a descendant of target ref name
-                if not c.is_range and other_scm_instance._repo.revs('present(%s)::&%s', c.cs_ranges[-1].raw_id, c.a_branch_name):
+                if not c.is_range and other_scm_instance.is_changeset_on_branch(c.cs_ranges[-1].raw_id, c.a_branch_name):
                     c.update_msg = _('This pull request has already been merged to %s.') % c.a_branch_name
                 elif c.pull_request.is_closed():
                     c.update_msg = _('This pull request has been closed and can not be updated.')
-                else: # look for descendants of PR head on source branch in org repo
-                    avail_revs = org_scm_instance._repo.revs('%s:: & branch(%s)',
-                                                             revs[0], c.cs_branch_name)
+                elif org_scm_instance.alias == 'git' and not c.cs_branch_name:
+                    c.update_msg = _('Cannot update pull request not created on branch head for git')
+                elif org_scm_instance.alias == 'hg': # look for descendants of PR head on source branch in org repo
+                    avail_revs = org_scm_instance.get_new_changesets_on_branch(c.cs_branch_name, revs[0])
+
                     if len(avail_revs) > 1: # more than just revs[0]
                         # also show changesets that not are descendants but would be merged in
                         targethead = other_scm_instance.get_changeset(c.a_branch_name).raw_id
@@ -637,10 +646,17 @@ class PullrequestsController(BaseRepoController):
                             h.short_id(org_scm_instance.get_changeset((max(brevs))).raw_id))
 
                     avail_show = sorted(show, reverse=True)
+                elif org_scm_instance.alias == 'git':
+                    avail_revs = org_scm_instance.get_new_changesets_on_branch(c.cs_branch_name, c.cs_ranges[-1].raw_id)
+                    if len(avail_revs) > 1:
+                        show = set(avail_revs)
+                        c.update_msg = _('The following additional changes are available on %s:') % c.cs_branch_name
+                    else:
+                        show = set()
+                        avail_revs = set()
+                        c.update_msg = _('No additional changesets found for iterating on this pull request.')
+                    avail_show = sorted(show, reverse=True)
 
-            elif org_scm_instance.alias == 'git':
-                c.cs_repo.scm_instance.get_changeset(c.cs_rev) # check it exists - raise ChangesetDoesNotExistError if not
-                c.update_msg = _("Git pull requests don't support updates yet.")
         except ChangesetDoesNotExistError:
             c.update_msg = _('Error: revision %s was not found. Please create a new pull request!') % c.cs_rev
 

@@ -178,6 +178,12 @@ class BaseRepository(object):
         """
         raise NotImplementedError
 
+    def get_new_changesets_on_branch(self, branch, baserev):
+        """
+        Returns list of new revisions that are available on the branch since baserev
+        """
+        raise NotImplementedError
+
     def __getslice__(self, i, j):
         """
         Returns a iterator of sliced repository
@@ -232,6 +238,15 @@ class BaseRepository(object):
           changes. Defaults to ``False``.
         :param context: How many lines before/after changed lines should be
           shown. Defaults to ``3``.
+        """
+        raise NotImplementedError
+
+    def is_changeset_on_branch(self, rev, branch):
+        """
+        Check if rev exists on branch.
+
+        :param rev: Changeset to check for
+        :param branch: Name of branch
         """
         raise NotImplementedError
 

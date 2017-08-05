@@ -93,6 +93,12 @@ class GitChangeset(BaseChangeset):
         ref = heads.get(self.raw_id)
         if ref:
             return safe_unicode(ref)
+        if len(self.on_branches) == 1:
+            return safe_unicode(self.on_branches[0])
+
+    @LazyProperty
+    def on_branches(self):
+        return self.repository.branch_contains(self.raw_id)
 
     def _fix_path(self, path):
         """

@@ -132,6 +132,10 @@ class MercurialRepository(BaseRepository):
 
         return bt
 
+    def is_changeset_on_branch(self, rev, branch):
+        revs = self._repo.revs('present(%s)::&%s', rev, branch)
+        return revs and True
+
     @LazyProperty
     def tags(self):
         """
@@ -552,6 +556,12 @@ class MercurialRepository(BaseRepository):
             revs = reversed(revs)
 
         return CollectionGenerator(self, revs)
+
+    def get_new_changesets_on_branch(self, branch, startrev):
+        """ Fetch new changesets on branch. """
+        avail_revs = self._repo.revs('%s:: & branch(%s)',
+                                                     startrev, branch)
+        return avail_revs
 
     def pull(self, url):
         """
