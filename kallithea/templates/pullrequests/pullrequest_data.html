@@ -1,6 +1,6 @@
 ## -*- coding: utf-8 -*-
 
-<%def name="pullrequest_overview(pullrequests)">
+<%def name="pullrequest_overview(pullrequests, results=None, my=False)">
 
 %if not len(pullrequests):
     <div class="normal-indent empty_data">${_('No entries')}</div>
@@ -11,9 +11,15 @@
   <table>
     <thead>
       <tr>
+%if my:
+        <th class="left">${_('Result')}</th>
+%else:
         <th class="left">${_('Vote')}</th>
+%endif
         <th class="left">${_('Title')}</th>
+%if not my:
         <th class="left">${_('Owner')}</th>
+%endif
         <th class="left">${_('Age')}</th>
         <th class="left">${_('From')}</th>
         <th class="left">${_('To')}</th>
@@ -23,11 +29,19 @@
 % for pr in pullrequests:
     <tr class="${'pr-closed' if pr.is_closed() else ''}">
       <td width="80px">
+%if my:
+        <% status = results and results[pr.pull_request_id] %>
+        <% title = _('Current Vote: %s') % h.changeset_status_lbl(status) %>
+        <% notitle = _('No votes') %>
+%else:
         <% status = pr.user_review_status(c.authuser.user_id) %>
+        <% title = _('You voted: %s') % h.changeset_status_lbl(status) %>
+        <% notitle = _('You didn\'t vote') %>
+%endif
         %if status:
-          <i class="icon-circle changeset-status-${status}" title="${_("You voted: %s") % status}"></i>
+          <i class="icon-circle changeset-status-${status}" title="${title}"></i>
         %else:
-          <i class="icon-circle changeset-status-not_reviewed" title="${_("You didn't vote")}"></i>
+          <i class="icon-circle changeset-status-not_reviewed" title="${notitle}"></i>
         %endif
       </td>
       <td>
@@ -38,9 +52,11 @@
         %endif
         </a>
       </td>
+%if not my:
       <td>
         ${pr.owner.full_name_and_username}
       </td>
+%endif
       <td>
         <span class="tooltip" title="${h.fmt_date(pr.created_on)}">
           ${h.age(pr.created_on)}

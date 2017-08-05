@@ -207,6 +207,7 @@ class PullrequestsController(BaseRepoController):
     @LoginRequired()
     @NotAnonymous()
     def show_my(self):
+        cs_model = ChangesetStatusModel()
         c.closed = request.GET.get('closed') or ''
 
         def _filter(pr):
@@ -219,6 +220,14 @@ class PullrequestsController(BaseRepoController):
                                 .filter(PullRequest.user_id ==
                                         self.authuser.user_id)\
                                 .all())
+
+        c.my_pull_request_results = {}
+        for pr in c.my_pull_requests:
+            (_pull_request_reviewers,
+             _pull_request_pending_reviewers,
+             current_voting_result,
+             ) = cs_model.calculate_pull_request_result(pr)
+            c.my_pull_request_results[pr.pull_request_id] = current_voting_result
 
         c.participate_in_pull_requests = _filter(PullRequest.query()\
                                 .join(PullRequestReviewers)\
