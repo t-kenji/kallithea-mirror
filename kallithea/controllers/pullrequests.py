@@ -411,7 +411,7 @@ class PullrequestsController(BaseRepoController):
         new_revisions = [r for r in revisions if r not in old_revisions]
         lost = old_revisions.difference(revisions)
 
-        infos = ['This is an update of %s "%s".' %
+        infos = [_('This is an update of %s "%s".') %
                  (h.canonical_url('pullrequest_show', repo_name=old_pull_request.other_repo.repo_name,
                       pull_request_id=old_pull_request.pull_request_id),
                   old_pull_request.title)]

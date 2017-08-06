@@ -12,20 +12,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Kallithea 0.3\n"
 "Report-Msgid-Bugs-To: translations@kallithea-scm.org\n"
-"POT-Creation-Date: 2017-07-25 16:37+0200\n"
+"POT-Creation-Date: 2017-08-06 04:06+0000\n"
 "PO-Revision-Date: 2016-01-07 01:53+0000\n"
 "Last-Translator: Takumi IINO <trot.thunder@gmail.com>\n"
 "Language-Team: Japanese "
 "<https://hosted.weblate.org/projects/kallithea/stable/ja/>\n"
-"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2.5-dev\n"
+"Generated-By: Babel 1.3\n"
 
 #: kallithea/controllers/changelog.py:86
-#: kallithea/controllers/pullrequests.py:238 kallithea/lib/base.py:512
+#: kallithea/controllers/pullrequests.py:257 kallithea/lib/base.py:512
 msgid "There are no changesets yet"
 msgstr "まだチェンジセットがありません"
 
@@ -41,7 +40,7 @@ msgstr "まだチェンジセットがありません"
 msgid "None"
 msgstr "なし"
 
-#: kallithea/controllers/changelog.py:168 kallithea/controllers/files.py:196
+#: kallithea/controllers/changelog.py:168 kallithea/controllers/files.py:197
 msgid "(closed)"
 msgstr "(閉鎖済み)"
 
@@ -60,21 +59,25 @@ msgid "Increase diff context to %(num)s lines"
 msgstr "diff コンテキストを %(num)s 行増やす"
 
 #: kallithea/controllers/changeset.py:212 kallithea/controllers/files.py:96
-#: kallithea/controllers/files.py:116 kallithea/controllers/files.py:742
+#: kallithea/controllers/files.py:116 kallithea/controllers/files.py:743
 msgid "Such revision does not exist for this repository"
 msgstr "お探しのリビジョンはこのリポジトリにはありません"
 
-#: kallithea/controllers/changeset.py:383
+#: kallithea/controllers/changeset.py:218
+msgid "Such revision has multiple candidates for this repository"
+msgstr "お探しのリビジョンはこのリポジトリに複数あります"
+
+#: kallithea/controllers/changeset.py:389
 msgid ""
 "Changing status on a changeset associated with a closed pull request is "
 "not allowed"
 msgstr "クローズしたプルリクエストに関連するチェンジセットのステータスを変更することは許可されていません"
 
-#: kallithea/controllers/compare.py:161 kallithea/templates/base/root.html:41
+#: kallithea/controllers/compare.py:165 kallithea/templates/base/root.html:41
 msgid "Select changeset"
 msgstr "リビジョンを選択"
 
-#: kallithea/controllers/compare.py:261
+#: kallithea/controllers/compare.py:265
 msgid "Cannot compare repositories without using common ancestor"
 msgstr "共通の祖先を持たないのでリポジトリを比較できません"
 
@@ -123,8 +126,8 @@ msgstr "%s %s フィード"
 #: kallithea/templates/changeset/changeset.html:195
 #: kallithea/templates/compare/compare_diff.html:78
 #: kallithea/templates/compare/compare_diff.html:89
-#: kallithea/templates/pullrequests/pullrequest_show.html:339
-#: kallithea/templates/pullrequests/pullrequest_show.html:363
+#: kallithea/templates/pullrequests/pullrequest_show.html:346
+#: kallithea/templates/pullrequests/pullrequest_show.html:370
 msgid "Changeset was too big and was cut off..."
 msgstr "チェンジセットが大きすぎるため、省略しました..."
 
@@ -143,104 +146,100 @@ msgid "There are no files yet. %s"
 msgstr "まだファイルがありません。 %s"
 
 #: kallithea/controllers/files.py:193
-#, fuzzy, python-format
-msgid "%s at %s"
-msgstr "%s と %s の間"
+#, python-format
+msgid "%(branch)s at %(raw_id)s"
+msgstr "%(raw_id)s の %(branch)s"
 
-#: kallithea/controllers/files.py:305 kallithea/controllers/files.py:365
-#: kallithea/controllers/files.py:432
+#: kallithea/controllers/files.py:306 kallithea/controllers/files.py:366
+#: kallithea/controllers/files.py:433
 #, python-format
 msgid "This repository has been locked by %s on %s"
 msgstr "このリポジトリは %s によって %s にロックされました"
 
-#: kallithea/controllers/files.py:317
-#, fuzzy
-#| msgid "You can only delete files with revision being a valid branch "
+#: kallithea/controllers/files.py:318
 msgid "You can only delete files with revision being a valid branch"
-msgstr "有効なブランチ上のリビジョンからしかファイルを削除できません"
+msgstr "有効なブランチ上のリビジョンでのみファイルを削除できます"
 
-#: kallithea/controllers/files.py:328
+#: kallithea/controllers/files.py:329
 #, python-format
 msgid "Deleted file %s via Kallithea"
 msgstr "Kallithea経由で %s を削除"
 
-#: kallithea/controllers/files.py:350
+#: kallithea/controllers/files.py:351
 #, python-format
 msgid "Successfully deleted file %s"
 msgstr "%s ファイルの削除に成功しました"
 
-#: kallithea/controllers/files.py:354 kallithea/controllers/files.py:420
-#: kallithea/controllers/files.py:501
+#: kallithea/controllers/files.py:355 kallithea/controllers/files.py:421
+#: kallithea/controllers/files.py:502
 msgid "Error occurred during commit"
 msgstr "コミット中にエラーが発生しました"
 
-#: kallithea/controllers/files.py:377
-#, fuzzy
-#| msgid "You can only edit files with revision being a valid branch "
+#: kallithea/controllers/files.py:378
 msgid "You can only edit files with revision being a valid branch"
-msgstr "有効なブランチを示すリビジョンでのみファイルを編集できます "
+msgstr "有効なブランチ上のリビジョンでのみファイルを編集できます "
 
-#: kallithea/controllers/files.py:391
+#: kallithea/controllers/files.py:392
 #, python-format
 msgid "Edited file %s via Kallithea"
 msgstr "Kallithea経由で %s を変更"
 
-#: kallithea/controllers/files.py:407
+#: kallithea/controllers/files.py:408
 msgid "No changes"
 msgstr "変更点なし"
 
-#: kallithea/controllers/files.py:416 kallithea/controllers/files.py:490
+#: kallithea/controllers/files.py:417 kallithea/controllers/files.py:491
 #, python-format
 msgid "Successfully committed to %s"
 msgstr "%s へのコミットが成功しました"
 
-#: kallithea/controllers/files.py:443
+#: kallithea/controllers/files.py:444
 msgid "Added file via Kallithea"
 msgstr "Kallithea経由でファイルを追加"
 
-#: kallithea/controllers/files.py:464
+#: kallithea/controllers/files.py:465
 msgid "No content"
 msgstr "内容がありません"
 
-#: kallithea/controllers/files.py:468
+#: kallithea/controllers/files.py:469
 msgid "No filename"
 msgstr "ファイル名がありません"
 
-#: kallithea/controllers/files.py:493
+#: kallithea/controllers/files.py:494
 msgid "Location must be relative path and must not contain .. in path"
 msgstr "場所には相対パスかつ .. を含まないパスを入力してください"
 
-#: kallithea/controllers/files.py:526
+#: kallithea/controllers/files.py:527
 msgid "Downloads disabled"
 msgstr "ダウンロードは無効化されています"
 
-#: kallithea/controllers/files.py:537
+#: kallithea/controllers/files.py:538
 #, python-format
 msgid "Unknown revision %s"
 msgstr "%s は未知のリビジョンです"
 
-#: kallithea/controllers/files.py:539
+#: kallithea/controllers/files.py:540
 msgid "Empty repository"
 msgstr "空のリポジトリ"
 
-#: kallithea/controllers/files.py:541
+#: kallithea/controllers/files.py:542
 msgid "Unknown archive type"
 msgstr "未知のアーカイブ種別です"
 
-#: kallithea/controllers/files.py:771
+#: kallithea/controllers/files.py:772
 #: kallithea/templates/changeset/changeset_range.html:9
 #: kallithea/templates/email_templates/pull_request.html:15
 #: kallithea/templates/pullrequests/pullrequest.html:97
 msgid "Changesets"
 msgstr "チェンジセット"
 
-#: kallithea/controllers/files.py:772 kallithea/controllers/pullrequests.py:176
+#: kallithea/controllers/files.py:773 kallithea/controllers/pullrequests.py:186
 #: kallithea/model/scm.py:820 kallithea/templates/switch_to_list.html:3
 #: kallithea/templates/branches/branches.html:10
 msgid "Branches"
 msgstr "ブランチ"
 
-#: kallithea/controllers/files.py:773 kallithea/controllers/pullrequests.py:177
+#: kallithea/controllers/files.py:774 kallithea/controllers/pullrequests.py:187
 #: kallithea/model/scm.py:831 kallithea/templates/switch_to_list.html:25
 #: kallithea/templates/tags/tags.html:10
 msgid "Tags"
@@ -317,132 +316,154 @@ msgstr "無効なパスワードリセットトークン"
 msgid "Successfully updated password"
 msgstr "パスワードを更新しました"
 
-#: kallithea/controllers/pullrequests.py:124
+#: kallithea/controllers/pullrequests.py:131
 #, python-format
 msgid "%s (closed)"
 msgstr "%s (閉鎖済み)"
 
-#: kallithea/controllers/pullrequests.py:152
+#: kallithea/controllers/pullrequests.py:159
 #: kallithea/templates/changeset/changeset.html:12
 #: kallithea/templates/email_templates/changeset_comment.html:17
 msgid "Changeset"
 msgstr "チェンジセット"
 
-#: kallithea/controllers/pullrequests.py:173
+#: kallithea/controllers/pullrequests.py:183
 msgid "Special"
 msgstr "スペシャル"
 
-#: kallithea/controllers/pullrequests.py:174
+#: kallithea/controllers/pullrequests.py:184
 msgid "Peer branches"
 msgstr "相手のブランチ"
 
-#: kallithea/controllers/pullrequests.py:175 kallithea/model/scm.py:826
+#: kallithea/controllers/pullrequests.py:185 kallithea/model/scm.py:826
 #: kallithea/templates/switch_to_list.html:38
 #: kallithea/templates/bookmarks/bookmarks.html:10
 msgid "Bookmarks"
 msgstr "ブックマーク"
 
-#: kallithea/controllers/pullrequests.py:310
+#: kallithea/controllers/pullrequests.py:329
 #, python-format
 msgid "Error creating pull request: %s"
 msgstr "プルリクエスト作成中にエラーが発生しました: %s"
 
-#: kallithea/controllers/pullrequests.py:356
-#: kallithea/controllers/pullrequests.py:503
+#: kallithea/controllers/pullrequests.py:375
+#: kallithea/controllers/pullrequests.py:522
 msgid "No description"
 msgstr "説明がありません"
 
-#: kallithea/controllers/pullrequests.py:363
+#: kallithea/controllers/pullrequests.py:382
 msgid "Successfully opened new pull request"
 msgstr "新しいプルリクエストの作成に成功しました"
 
-#: kallithea/controllers/pullrequests.py:366
-#: kallithea/controllers/pullrequests.py:453
-#: kallithea/controllers/pullrequests.py:510
+#: kallithea/controllers/pullrequests.py:385
+#: kallithea/controllers/pullrequests.py:472
+#: kallithea/controllers/pullrequests.py:529
 #, python-format
 msgid "Invalid reviewer \"%s\" specified"
-msgstr ""
+msgstr "無効なレビュアー \"%s\" が指定されました"
 
-#: kallithea/controllers/pullrequests.py:369
-#: kallithea/controllers/pullrequests.py:456
+#: kallithea/controllers/pullrequests.py:388
+#: kallithea/controllers/pullrequests.py:475
 msgid "Error occurred while creating pull request"
 msgstr "プルリクエストの作成中にエラーが発生しました"
 
-#: kallithea/controllers/pullrequests.py:401
-msgid "Missing changesets since the previous pull request:"
-msgstr ""
+#: kallithea/controllers/pullrequests.py:414
+#, python-format
+msgid "This is an update of %s \"%s\"."
+msgstr "%s \"%s\" に対する更新です"
 
-#: kallithea/controllers/pullrequests.py:408
+#: kallithea/controllers/pullrequests.py:420
+msgid "Missing changesets since the previous pull request:"
+msgstr "以前のプルリクエスト以降のチェンジセットがありません:"
+
+#: kallithea/controllers/pullrequests.py:427
 #, python-format
 msgid "New changesets on %s %s since the previous pull request:"
-msgstr ""
+msgstr "以前のプルリクエスト以降の %s %s に関する新しいチェンジセット:"
 
-#: kallithea/controllers/pullrequests.py:415
+#: kallithea/controllers/pullrequests.py:434
 msgid "Ancestor didn't change - show diff since previous version:"
-msgstr ""
+msgstr "祖先は変化しなかった - 以前のバージョンからの差分を表示:"
 
-#: kallithea/controllers/pullrequests.py:422
+#: kallithea/controllers/pullrequests.py:441
 #, python-format
 msgid ""
 "This pull request is based on another %s revision and there is no simple "
 "diff."
-msgstr ""
+msgstr "このプルリクエストは別の %s リビジョンに基づいており、単純な差分ではありません。"
 
-#: kallithea/controllers/pullrequests.py:424
+#: kallithea/controllers/pullrequests.py:443
 #, python-format
 msgid "No changes found on %s %s since previous version."
-msgstr ""
+msgstr "以前のバージョン以降の %s %s に関する変更は見つかりませんでした。"
 
-#: kallithea/controllers/pullrequests.py:462
+#: kallithea/controllers/pullrequests.py:481
 #, python-format
 msgid "Closed, replaced by %s ."
 msgstr "%s で置き換えられたのでクローズします。"
 
-#: kallithea/controllers/pullrequests.py:470
-#, fuzzy
+#: kallithea/controllers/pullrequests.py:489
 msgid "Pull request update created"
-msgstr "プルリクエストレビュアー"
+msgstr "更新したプルリクエストを作成しました"
 
-#: kallithea/controllers/pullrequests.py:514
+#: kallithea/controllers/pullrequests.py:533
 msgid "Pull request updated"
 msgstr "プルリクエストを更新しました"
 
-#: kallithea/controllers/pullrequests.py:529
+#: kallithea/controllers/pullrequests.py:548
 msgid "Successfully deleted pull request"
 msgstr "プルリクエストの削除に成功しました"
 
-#: kallithea/controllers/pullrequests.py:595
+#: kallithea/controllers/pullrequests.py:627
 #, python-format
 msgid "This pull request has already been merged to %s."
-msgstr ""
+msgstr "このプルリクエストはすでに %s にマージされています。"
 
-#: kallithea/controllers/pullrequests.py:597
+#: kallithea/controllers/pullrequests.py:629
 msgid "This pull request has been closed and can not be updated."
 msgstr "このプルリクエストはすでにクローズされていて、更新することはできません。"
 
-#: kallithea/controllers/pullrequests.py:615
+#: kallithea/controllers/pullrequests.py:631
+msgid "Cannot update pull request not created on branch head for git"
+msgstr "プルリクエストは git のブランチヘッドで作成されていないため、更新できません"
+
+#: kallithea/controllers/pullrequests.py:649
 #, python-format
 msgid "This pull request can be updated with changes on %s:"
-msgstr ""
+msgstr "このプルリクエストは %s の変更で更新できます:"
 
-#: kallithea/controllers/pullrequests.py:619
+#: kallithea/controllers/pullrequests.py:653
 msgid "No changesets found for updating this pull request."
 msgstr "プルリクエストを更新するためのチェンジセットが見つかりません。"
 
-#: kallithea/controllers/pullrequests.py:627
+#: kallithea/controllers/pullrequests.py:661
 #, python-format
 msgid "Note: Branch %s has another head: %s."
 msgstr "ノート: ブランチ%sには別のヘッド%sがあります。"
 
-#: kallithea/controllers/pullrequests.py:633
-msgid "Git pull requests don't support updates yet."
-msgstr "Gitのプルリクエストはまだ更新をサポートしていません。"
+#: kallithea/controllers/pullrequests.py:669
+#, python-format
+msgid "The following additional changes are available on %s:"
+msgstr "%s では次の変更が追加されています:"
 
-#: kallithea/controllers/pullrequests.py:724
+#: kallithea/controllers/pullrequests.py:673
+msgid "No additional changesets found for iterating on this pull request."
+msgstr "プルリクエストを更新するためのチェンジセットが見つかりません。"
+
+#: kallithea/controllers/pullrequests.py:677
+#, python-format
+msgid "Error: revision %s was not found. Please create a new pull request!"
+msgstr "エラー: リビジョン %s は見つかりませんでした。新しいプルリクエストを作成してください。"
+
+#: kallithea/controllers/pullrequests.py:702
+msgid "The diff can't be shown - the PR revisions could not be found."
+msgstr "差分は表示することができません - プルリクエストのリビジョンが見つかりませんでした。"
+
+#: kallithea/controllers/pullrequests.py:778
 msgid "No permission to change pull request status"
 msgstr "プルリクエストステータスを変更する権限がありません"
 
-#: kallithea/controllers/pullrequests.py:729
+#: kallithea/controllers/pullrequests.py:783
 msgid "Closing."
 msgstr "クローズ。"
 
@@ -913,10 +934,9 @@ msgid "Repositories successfully rescanned. Added: %s. Removed: %s."
 msgstr "リポジトリの再スキャンに成功しました。 追加: %s 削除: %s。"
 
 #: kallithea/controllers/admin/settings.py:226
-#, fuzzy, python-format
-#| msgid "Invalidate cache for all repositories"
+#, python-format
 msgid "Invalidated %s repositories"
-msgstr "すべてのリポジトリのキャッシュを無効化する"
+msgstr "%s のリポジトリを無効にします"
 
 #: kallithea/controllers/admin/settings.py:280
 msgid "Updated application settings"
@@ -1065,10 +1085,9 @@ msgid "Repository not found in the filesystem"
 msgstr "ファイルシステム内にリポジトリが見つかりません"
 
 #: kallithea/lib/base.py:516
-#, fuzzy, python-format
-#| msgid "Changeset not found"
+#, python-format
 msgid "Changeset for %s %s not found in %s"
-msgstr "リビジョンが見つかりません"
+msgstr "%s %s のチェンジセットが %s にありません"
 
 #: kallithea/lib/diffs.py:66
 msgid "Binary file"
@@ -1093,10 +1112,9 @@ msgid "Created tag: %s"
 msgstr "作成したタグ: %s"
 
 #: kallithea/lib/helpers.py:623
-#, fuzzy, python-format
-#| msgid "Changeset not found"
+#, python-format
 msgid "Changeset %s not found"
-msgstr "リビジョンが見つかりません"
+msgstr "チェンジセット %s が見つかりません"
 
 #: kallithea/lib/helpers.py:672
 #, python-format
@@ -1217,7 +1235,7 @@ msgstr " と %s 以上"
 
 #: kallithea/lib/helpers.py:1129
 #: kallithea/templates/compare/compare_diff.html:65
-#: kallithea/templates/pullrequests/pullrequest_show.html:326
+#: kallithea/templates/pullrequests/pullrequest_show.html:333
 msgid "No files"
 msgstr "ファイルはありません"
 
@@ -1828,8 +1846,6 @@ msgid "Only admins can fork repositories"
 msgstr "管理者のみがリポジトリをフォークすることができます"
 
 #: kallithea/model/db.py:1696
-#, fuzzy
-#| msgid "Non-admins can can fork repositories"
 msgid "Non-admins can fork repositories"
 msgstr "非管理者がリポジトリをフォークすることができます"
 
@@ -1934,7 +1950,7 @@ msgstr "%(user)s がプルリクエストにコメント %(when)s"
 #: kallithea/model/notification.py:303
 #, python-format
 msgid "[Comment] %(repo_name)s changeset %(short_id)s on %(branch)s"
-msgstr ""
+msgstr "%(repo_name)s %(branch)s のチェンジセット %(short_id)s にコメント"
 
 #: kallithea/model/notification.py:306
 #, python-format
@@ -1942,14 +1958,14 @@ msgid "New user %(new_username)s registered"
 msgstr "新しいユーザー %(new_username)s が登録されました"
 
 #: kallithea/model/notification.py:308
-#, fuzzy, python-format
+#, python-format
 msgid "[Added] %(repo_name)s pull request %(pr_nice_id)s from %(ref)s"
-msgstr "%(user)s がプリリクエスト #%(pr_id)s: %(pr_title)s のレビューを求めています"
+msgstr "%(repo_name)s に %(ref)s からのプルリクエスト #%(pr_nice_id)s が追加"
 
 #: kallithea/model/notification.py:309
-#, fuzzy, python-format
+#, python-format
 msgid "[Comment] %(repo_name)s pull request %(pr_nice_id)s from %(ref)s"
-msgstr "プルリクエストに[コメント]"
+msgstr "%(ref)s から %(repo_name)s へのプルリクエスト #%(pr_nice_id)s にコメント"
 
 #: kallithea/model/notification.py:322
 msgid "Closing"
@@ -1969,9 +1985,8 @@ msgid "New user registration"
 msgstr "新規ユーザー登録"
 
 #: kallithea/model/user.py:256
-#, fuzzy
 msgid "You can't remove this user since it is crucial for the entire application"
-msgstr "このユーザーを削除できません。このユーザーはアプリケーションにとって必要不可欠です。"
+msgstr "このユーザはアプリケーション全体にとって重要なため削除できません"
 
 #: kallithea/model/user.py:261
 #, python-format
@@ -2302,9 +2317,9 @@ msgstr "Tip"
 #: kallithea/templates/admin/repos/repos.html:50
 #: kallithea/templates/admin/user_groups/user_group_edit_advanced.html:8
 #: kallithea/templates/admin/user_groups/user_groups.html:50
-#: kallithea/templates/pullrequests/pullrequest_data.html:16
+#: kallithea/templates/pullrequests/pullrequest_data.html:21
 #: kallithea/templates/pullrequests/pullrequest_show.html:156
-#: kallithea/templates/pullrequests/pullrequest_show.html:233
+#: kallithea/templates/pullrequests/pullrequest_show.html:240
 #: kallithea/templates/summary/summary.html:134
 msgid "Owner"
 msgstr "所有者"
@@ -2873,7 +2888,7 @@ msgstr "非公開 Gist"
 #: kallithea/templates/files/files_source.html:39
 #: kallithea/templates/files/files_source.html:42
 #: kallithea/templates/files/files_source.html:45
-#: kallithea/templates/pullrequests/pullrequest_data.html:20
+#: kallithea/templates/pullrequests/pullrequest_data.html:26
 msgid "Delete"
 msgstr "削除"
 
@@ -3143,11 +3158,11 @@ msgid "Anonymous access"
 msgstr "匿名アクセス"
 
 #: kallithea/templates/admin/permissions/permissions_globals.html:13
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Allow access to Kallithea without needing to log in. Anonymous users use "
 "%s user permissions."
-msgstr "ログインしなくても Kallithea にアクセスできるようにします。匿名ユーザーは %s ユーザーパーミッションを使います"
+msgstr "ログインしなくても Kallithea にアクセスできるようにします。匿名ユーザーは %s ユーザーパーミッションを使います。"
 
 #: kallithea/templates/admin/permissions/permissions_globals.html:25
 msgid ""
@@ -3157,13 +3172,12 @@ msgid ""
 msgstr "選択したパーミッションで、各リポジトリのデフォルトパーミッションをリセットします。各リポジトリの既存のカスタムデフォルトパーミッション設定は無くなるので注意してください"
 
 #: kallithea/templates/admin/permissions/permissions_globals.html:26
-#, fuzzy
 msgid "Apply to all existing repositories"
-msgstr "既存のリポジトリを import しますか？"
+msgstr "既存のすべてのリポジトリに適用"
 
 #: kallithea/templates/admin/permissions/permissions_globals.html:27
 msgid "Permissions for the Default user on new repositories."
-msgstr ""
+msgstr "新しいリポジトリでのデフォルトのユーザーに対する権限です。"
 
 #: kallithea/templates/admin/permissions/permissions_globals.html:32
 #: kallithea/templates/admin/repos/repo_add_base.html:37
@@ -3181,14 +3195,12 @@ msgid ""
 msgstr "選択したパーミッションで、各リポジトリグループのデフォルトパーミッションをリセットします。各リポジトリグループの既存のカスタムデフォルトパーミッション設定は無くなるので注意してください"
 
 #: kallithea/templates/admin/permissions/permissions_globals.html:40
-#, fuzzy
 msgid "Apply to all existing repository groups"
-msgstr "既存のリポジトリを import しますか？"
+msgstr "既存のすべてのリポジトリグループに適用"
 
 #: kallithea/templates/admin/permissions/permissions_globals.html:41
-#, fuzzy
 msgid "Permissions for the Default user on new repository groups."
-msgstr "親のリポジトリグループにセットされているパーミッションをコピーします。"
+msgstr "新しいリポジトリグループでのデフォルトのユーザーに対する権限です。"
 
 #: kallithea/templates/admin/permissions/permissions_globals.html:46
 #: kallithea/templates/data_table/_dt_elements.html:209
@@ -3196,7 +3208,6 @@ msgid "User group"
 msgstr "ユーザーグループ"
 
 #: kallithea/templates/admin/permissions/permissions_globals.html:53
-#, fuzzy
 msgid ""
 "All default permissions on each user group will be reset to chosen "
 "permission, note that all custom default permission on user groups will "
@@ -3205,11 +3216,11 @@ msgstr "選択したパーミッションで、各ユーザーグループのデ
 
 #: kallithea/templates/admin/permissions/permissions_globals.html:54
 msgid "Apply to all existing user groups"
-msgstr ""
+msgstr "既存のすべてのユーザーグループに適用"
 
 #: kallithea/templates/admin/permissions/permissions_globals.html:55
 msgid "Permissions for the Default user on new user groups."
-msgstr ""
+msgstr "新しいユーザーグループでのデフォルトのユーザーに対する権限です。"
 
 #: kallithea/templates/admin/permissions/permissions_globals.html:60
 msgid "Top level repository creation"
@@ -3230,7 +3241,6 @@ msgid "Repository creation with group write access"
 msgstr "グループ書き込み権限でのリポジトリ作成"
 
 #: kallithea/templates/admin/permissions/permissions_globals.html:74
-#, fuzzy
 msgid ""
 "With this, write permission to a repository group allows creating "
 "repositories inside that group. Without this, group write permissions "
@@ -3387,9 +3397,8 @@ msgstr "ユーザー/ユーザーグループ"
 #: kallithea/templates/admin/repos/repo_edit_permissions.html:37
 #: kallithea/templates/admin/user_groups/user_group_edit_perms.html:28
 #: kallithea/templates/admin/user_groups/user_group_edit_perms.html:45
-#, fuzzy
 msgid "Default"
-msgstr "Default"
+msgstr "デフォルト"
 
 #: kallithea/templates/admin/repo_groups/repo_group_edit_perms.html:34
 #: kallithea/templates/admin/repo_groups/repo_group_edit_perms.html:71
@@ -3494,9 +3503,9 @@ msgid ""
 msgstr "ファイルページ、ダウンロード、全文検索インデックス、READMEなどの生成に使うデフォルトのリビジョン"
 
 #: kallithea/templates/admin/repos/repo_creating.html:9
-#, fuzzy, python-format
+#, python-format
 msgid "%s Creating Repository"
-msgstr "%s Creating repository"
+msgstr "%s リポジトリを作成する"
 
 #: kallithea/templates/admin/repos/repo_creating.html:13
 msgid "Creating repository"
@@ -3920,7 +3929,6 @@ msgid "Invalidate cache for all repositories"
 msgstr "すべてのリポジトリのキャッシュを無効化する"
 
 #: kallithea/templates/admin/settings/settings_mapping.html:19
-#, fuzzy
 msgid "Check this to reload data and clear cache keys for all repositories."
 msgstr "すべてのリポジトリのキャッシュを無効化する"
 
@@ -4104,7 +4112,6 @@ msgid "Use Gravatars in Kallithea"
 msgstr "Gravatorsを利用する"
 
 #: kallithea/templates/admin/settings/settings_visual.html:30
-#, fuzzy
 msgid ""
 "Gravatar URL allows you to use another avatar server application.\n"
 "                                                        The following "
@@ -4645,9 +4652,8 @@ msgid "Show Selected Changesets {0} &rarr; {1}"
 msgstr "選択したチェンジセット{0} &rarr; {0}を表示"
 
 #: kallithea/templates/base/root.html:34
-#, fuzzy
 msgid "Selection Link"
-msgstr "セレクション・リンク"
+msgstr "選択リンク"
 
 #: kallithea/templates/base/root.html:35
 #: kallithea/templates/changeset/diff_block.html:8
@@ -4842,7 +4848,7 @@ msgid "Commit Message"
 msgstr "コミットメッセージ"
 
 #: kallithea/templates/changelog/changelog_summary_data.html:9
-#: kallithea/templates/pullrequests/pullrequest_data.html:17
+#: kallithea/templates/pullrequests/pullrequest_data.html:23
 msgid "Age"
 msgstr "経過時間"
 
@@ -4909,27 +4915,24 @@ msgid "Merge"
 msgstr "マージ"
 
 #: kallithea/templates/changeset/changeset.html:123
-#, fuzzy
 msgid "Grafted from:"
-msgstr "作成日"
+msgstr "移植元:"
 
 #: kallithea/templates/changeset/changeset.html:129
 msgid "Transplanted from:"
-msgstr ""
+msgstr "移植元:"
 
 #: kallithea/templates/changeset/changeset.html:135
-#, fuzzy
 msgid "Replaced by:"
-msgstr "作成日"
+msgstr "置換:"
 
 #: kallithea/templates/changeset/changeset.html:149
-#, fuzzy
 msgid "Preceded by:"
-msgstr "作成日"
+msgstr "先行:"
 
 #: kallithea/templates/changeset/changeset.html:166
 #: kallithea/templates/compare/compare_diff.html:54
-#: kallithea/templates/pullrequests/pullrequest_show.html:318
+#: kallithea/templates/pullrequests/pullrequest_show.html:325
 #, python-format
 msgid "%s file changed"
 msgid_plural "%s files changed"
@@ -4937,7 +4940,7 @@ msgstr[0] "%s ファイルに影響"
 
 #: kallithea/templates/changeset/changeset.html:168
 #: kallithea/templates/compare/compare_diff.html:56
-#: kallithea/templates/pullrequests/pullrequest_show.html:320
+#: kallithea/templates/pullrequests/pullrequest_show.html:327
 #, python-format
 msgid "%s file changed with %s insertions and %s deletions"
 msgid_plural "%s files changed with %s insertions and %s deletions"
@@ -4945,8 +4948,8 @@ msgstr[0] "%s ファイルに影響。 %s 個の追加と %s 個の削除"
 
 #: kallithea/templates/changeset/changeset.html:182
 #: kallithea/templates/changeset/changeset.html:195
-#: kallithea/templates/pullrequests/pullrequest_show.html:339
-#: kallithea/templates/pullrequests/pullrequest_show.html:363
+#: kallithea/templates/pullrequests/pullrequest_show.html:346
+#: kallithea/templates/pullrequests/pullrequest_show.html:370
 msgid "Show full diff anyway"
 msgstr "とにかくすべての差分を表示"
 
@@ -4956,18 +4959,16 @@ msgid "No revisions"
 msgstr "リビジョンなし"
 
 #: kallithea/templates/changeset/changeset_file_comment.html:21
-#, fuzzy
 msgid "on pull request"
-msgstr "プルリクエスト #%s にコメント"
+msgstr "on プルリクエスト"
 
 #: kallithea/templates/changeset/changeset_file_comment.html:22
 msgid "No title"
-msgstr "No title"
+msgstr "無題"
 
 #: kallithea/templates/changeset/changeset_file_comment.html:24
-#, fuzzy
 msgid "on this changeset"
-msgstr "チェンジセットはありません"
+msgstr "on チェンジセット"
 
 #: kallithea/templates/changeset/changeset_file_comment.html:30
 msgid "Delete comment?"
@@ -5057,9 +5058,8 @@ msgid "No change"
 msgstr "変更なし"
 
 #: kallithea/templates/changeset/changeset_file_comment.html:176
-#, fuzzy
 msgid "Close"
-msgstr "(閉鎖済み)"
+msgstr "クローズ"
 
 #: kallithea/templates/changeset/changeset_range.html:5
 #, python-format
@@ -5118,7 +5118,7 @@ msgid "Show merge diff"
 msgstr "マージの差分を表示"
 
 #: kallithea/templates/compare/compare_cs.html:86
-#: kallithea/templates/pullrequests/pullrequest_show.html:310
+#: kallithea/templates/pullrequests/pullrequest_show.html:317
 msgid "Common ancestor"
 msgstr "共通の祖先"
 
@@ -5159,7 +5159,7 @@ msgid "Compare revisions, branches, bookmarks, or tags."
 msgstr "リビジョン、ブランチ、ブックマークもしくはタグの比較を行います。"
 
 #: kallithea/templates/compare/compare_diff.html:47
-#: kallithea/templates/pullrequests/pullrequest_show.html:305
+#: kallithea/templates/pullrequests/pullrequest_show.html:312
 #, python-format
 msgid "Showing %s commit"
 msgid_plural "Showing %s commits"
@@ -5257,14 +5257,12 @@ msgid "Comment from %s on %s pull request \"%s\""
 msgstr "%sから%sのプルリクエスト \"%s\"に対するコメント"
 
 #: kallithea/templates/email_templates/pull_request_comment.html:9
-#, fuzzy
 msgid "The comment closed the pull request with status"
-msgstr "%s がプルリクエスト\"%s\" にコメントしました"
+msgstr "コメントはステータス変更とともにプルリクエストをクローズしました"
 
 #: kallithea/templates/email_templates/pull_request_comment.html:11
-#, fuzzy
 msgid "The comment was made with status"
-msgstr "プルリクエストを以下のステータスで閉じました："
+msgstr "コメントはステータスとともに作成されました"
 
 #: kallithea/templates/email_templates/registration.html:6
 msgid "View this user here"
@@ -5567,7 +5565,7 @@ msgid "New Pull Request"
 msgstr "新しいプルリクエスト"
 
 #: kallithea/templates/pullrequests/pullrequest.html:31
-#: kallithea/templates/pullrequests/pullrequest_data.html:15
+#: kallithea/templates/pullrequests/pullrequest_data.html:19
 #: kallithea/templates/pullrequests/pullrequest_show.html:29
 #: kallithea/templates/pullrequests/pullrequest_show.html:54
 msgid "Title"
@@ -5598,46 +5596,59 @@ msgstr "相手のリポジトリ"
 msgid "No entries"
 msgstr "まだエントリがありません"
 
-#: kallithea/templates/pullrequests/pullrequest_data.html:14
+#: kallithea/templates/pullrequests/pullrequest_data.html:15
+msgid "Result"
+msgstr "結果"
+
+#: kallithea/templates/pullrequests/pullrequest_data.html:17
 msgid "Vote"
 msgstr "投票"
 
-#: kallithea/templates/pullrequests/pullrequest_data.html:18
+#: kallithea/templates/pullrequests/pullrequest_data.html:24
 msgid "From"
 msgstr "From"
 
-#: kallithea/templates/pullrequests/pullrequest_data.html:19
+#: kallithea/templates/pullrequests/pullrequest_data.html:25
 msgid "To"
 msgstr "To"
 
-#: kallithea/templates/pullrequests/pullrequest_data.html:28
+#: kallithea/templates/pullrequests/pullrequest_data.html:34
+#, python-format
+msgid "Current Vote: %s"
+msgstr "現在の投票内容: %s"
+
+#: kallithea/templates/pullrequests/pullrequest_data.html:35
+msgid "No votes"
+msgstr "投票なし"
+
+#: kallithea/templates/pullrequests/pullrequest_data.html:38
 #, python-format
 msgid "You voted: %s"
 msgstr "あなたの投票内容: %s"
 
-#: kallithea/templates/pullrequests/pullrequest_data.html:30
+#: kallithea/templates/pullrequests/pullrequest_data.html:39
 msgid "You didn't vote"
 msgstr "投票していません"
 
-#: kallithea/templates/pullrequests/pullrequest_data.html:35
+#: kallithea/templates/pullrequests/pullrequest_data.html:49
 msgid "(no title)"
 msgstr "(no title)"
 
-#: kallithea/templates/pullrequests/pullrequest_data.html:37
+#: kallithea/templates/pullrequests/pullrequest_data.html:51
 #: kallithea/templates/pullrequests/pullrequest_show.html:31
 #: kallithea/templates/pullrequests/pullrequest_show.html:83
 msgid "Closed"
-msgstr "クローズ"
+msgstr "クローズ済み"
 
-#: kallithea/templates/pullrequests/pullrequest_data.html:67
+#: kallithea/templates/pullrequests/pullrequest_data.html:83
 msgid "Delete Pull Request"
 msgstr "プルリクエストの削除"
 
-#: kallithea/templates/pullrequests/pullrequest_data.html:68
+#: kallithea/templates/pullrequests/pullrequest_data.html:84
 msgid "Confirm to delete this pull request"
 msgstr "このプルリクエストを削除してもよろしいですか？"
 
-#: kallithea/templates/pullrequests/pullrequest_data.html:70
+#: kallithea/templates/pullrequests/pullrequest_data.html:86
 #, python-format
 msgid "Confirm again to delete this pull request with %s comments"
 msgstr "このプルリクエストには %s件のコメントがありますが削除してもよろしいですか？"
@@ -5648,9 +5659,9 @@ msgid "%s Pull Request %s"
 msgstr "%s プルリクエスト %s"
 
 #: kallithea/templates/pullrequests/pullrequest_show.html:10
-#, fuzzy, python-format
+#, python-format
 msgid "Pull request %s from %s#%s"
-msgstr "%s からのプルリクエスト"
+msgstr "プルリクエスト %s 要求元 %s#%s"
 
 #: kallithea/templates/pullrequests/pullrequest_show.html:57
 msgid "Summarize the changes"
@@ -5713,39 +5724,39 @@ msgstr "更新"
 msgid "Current revision - no change"
 msgstr "現在のリビジョン ｰ 変更なし"
 
-#: kallithea/templates/pullrequests/pullrequest_show.html:213
+#: kallithea/templates/pullrequests/pullrequest_show.html:220
 msgid "Pull Request Reviewers"
 msgstr "プルリクエストレビュアー"
 
-#: kallithea/templates/pullrequests/pullrequest_show.html:238
+#: kallithea/templates/pullrequests/pullrequest_show.html:245
 msgid "Remove reviewer"
 msgstr "レビュアーを削除"
 
-#: kallithea/templates/pullrequests/pullrequest_show.html:250
+#: kallithea/templates/pullrequests/pullrequest_show.html:257
 msgid "Type name of reviewer to add"
 msgstr "追加するレビュアーの名前を入力"
 
-#: kallithea/templates/pullrequests/pullrequest_show.html:258
+#: kallithea/templates/pullrequests/pullrequest_show.html:265
 msgid "Potential Reviewers"
 msgstr "レビュワー候補"
 
-#: kallithea/templates/pullrequests/pullrequest_show.html:261
+#: kallithea/templates/pullrequests/pullrequest_show.html:268
 msgid "Click to add the repository owner as reviewer:"
 msgstr "クリックしてリポジトリの所有所をレビュアーに追加:"
 
-#: kallithea/templates/pullrequests/pullrequest_show.html:284
+#: kallithea/templates/pullrequests/pullrequest_show.html:291
 msgid "Save Changes"
 msgstr "変更を保存"
 
-#: kallithea/templates/pullrequests/pullrequest_show.html:285
+#: kallithea/templates/pullrequests/pullrequest_show.html:292
 msgid "Save as New Pull Request"
 msgstr "新しいプルリクエストとして保存"
 
-#: kallithea/templates/pullrequests/pullrequest_show.html:286
+#: kallithea/templates/pullrequests/pullrequest_show.html:293
 msgid "Cancel Changes"
 msgstr "変更をキャンセル"
 
-#: kallithea/templates/pullrequests/pullrequest_show.html:296
+#: kallithea/templates/pullrequests/pullrequest_show.html:303
 msgid "Pull Request Content"
 msgstr "プルリクエストの内容"
 
@@ -5755,10 +5766,9 @@ msgid "%s Pull Requests"
 msgstr "%s プルリクエスト"
 
 #: kallithea/templates/pullrequests/pullrequest_show_all.html:11
-#, fuzzy, python-format
-#| msgid "Pull Requests from %s'"
+#, python-format
 msgid "Pull Requests from '%s'"
-msgstr "%s' からのプルリクエスト"
+msgstr "'%s' からのプルリクエスト"
 
 #: kallithea/templates/pullrequests/pullrequest_show_all.html:13
 #, python-format
@@ -6221,4 +6231,16 @@ msgstr "タグを比較"
 
 #~ msgid "Created by"
 #~ msgstr "作成日"
+
+#~ msgid "Git pull requests don't support updates yet."
+#~ msgstr "Gitのプルリクエストはまだ更新をサポートしていません。"
+
+#~ msgid "%s at %s"
+#~ msgstr "%s と %s の間"
+
+#~ msgid "Changeset for %s %s not found in %s"
+#~ msgstr "リビジョンが見つかりません"
+
+#~ msgid "Changeset for {ref_type} {ref_name} not found in {repo_name}"
+#~ msgstr ""
 
