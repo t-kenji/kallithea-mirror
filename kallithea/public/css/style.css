@@ -4667,6 +4667,13 @@ table.code-difftable .del del {
     text-decoration: none;
 }
 
+table.code-highlighttable div.code-highlight pre,
+table.code-difftable .code pre {
+    tab-size: 4;
+    -moz-tab-size: 4; /* Code for Firefox */
+    -o-tab-size: 4; /* Code for Opera */
+}
+
 table.code-highlighttable div.code-highlight pre u:before,
 table.code-difftable td.code pre u:before {
     content: "\21a6";
