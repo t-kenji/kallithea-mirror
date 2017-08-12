@@ -213,3 +213,103 @@ def _pullhook(*args, **kwargs):
     """
     return 0
 PULL_HOOK = _pullhook
+
+
+#==============================================================================
+# CREATE PULLREQUEST HOOK
+#==============================================================================
+
+def _create_pullrequest_hook(*args, **kwargs):
+    """
+    Create pull request hook
+    kwargs available::
+
+      :param pr_title:
+      :param pr_description:
+      :param pr_created_by:
+      :param pr_revisions:
+      :param pr_nice_id:
+      :param pr_url:
+      :param org_ref:
+      :param org_repo_name:
+      :param org_repo_owner:
+      :param other_ref:
+      :param other_repo_name:
+      :param other_repo_owner:
+    """
+    return 0
+CREATE_PULLREQUEST_HOOK = _create_pullrequest_hook
+
+
+#==============================================================================
+# ADD PULLREQUEST REVIEWER HOOK
+#==============================================================================
+
+def _add_pullrequest_reviewer_hook(*args, **kwargs):
+    """
+    Add pull request reviewer hook
+    kwargs available::
+
+      :param pr_title:
+      :param pr_description:
+      :param pr_created_by:
+      :param pr_revisions:
+      :param pr_added_reviewers:
+      :param pr_nice_id:
+      :param pr_url:
+      :param org_ref:
+      :param other_ref:
+      :param other_repo_name:
+    """
+    return 0
+ADD_PULLREQUEST_REVIEWER_HOOK = _add_pullrequest_reviewer_hook
+
+
+#==============================================================================
+# ADD CHANGESET COMMENT HOOK
+#==============================================================================
+
+def _add_changeset_comment_hook(*args, **kwargs):
+    """
+    Add changeset comment hook
+    kwargs available::
+
+      :param comment:
+      :param line_no:
+      :param status_change:
+      :param comment_user:
+      :param comment_url:
+      :param raw_id:
+      :param repo_name:
+      :param repo_owner:
+      :param branch:
+    """
+    return 0
+ADD_CHANGESET_COMMENT_HOOK = _add_changeset_comment_hook
+
+
+#==============================================================================
+# ADD PULLREQUEST COMMENT HOOK
+#==============================================================================
+
+def _add_pullrequest_comment_hook(*args, **kwargs):
+    """
+    Add pull request comment hook
+    kwargs available::
+
+      :param comment:
+      :param line_no:
+      :param status_change:
+      :param comment_user:
+      :param comment_url:
+      :param org_ref:
+      :param org_repo_owner:
+      :param other_repo_name:
+      :param other_repo_owner:
+      :param pr_title:
+      :param pr_nice_id:
+      :param pr_owner:
+      :param closing_pr:
+    """
+    return 0
+ADD_PULLREQUEST_COMMENT_HOOK = _add_pullrequest_comment_hook

@@ -193,6 +193,53 @@ class ChangesetCommentsModel(BaseModel):
         Session().flush()
 
         if send_email:
+            # extension hook call
+            from kallithea import EXTENSIONS
+            if revision:
+                # comment for changeset
+                callback = getattr(EXTENSIONS, 'ADD_CHANGESET_COMMENT_HOOK', None)
+                if callable(callback):
+                    cs = repo.scm_instance.get_changeset(revision)
+                    comment_url = h.canonical_url('changeset_home',
+                                                  repo_name=repo.repo_name,
+                                                  revision=revision,
+                                                  anchor='comment-%s' % comment.comment_id)
+                    kw = dict(
+                        comment=text,
+                        line_no=line_no,
+                        status_change=status_change,
+                        comment_user=user.username,
+                        comment_url=comment_url,
+                        raw_id=revision,
+                        repo_name=repo.repo_name,
+                        repo_owner=repo.user.username,
+                        branch=cs.branch,
+                    );
+                    callback(**kw)
+            else:
+                # comment for pullrequest
+                callback = getattr(EXTENSIONS, 'ADD_PULLREQUEST_COMMENT_HOOK', None)
+                if callable(callback):
+                    _org_ref_type, org_ref_name, _org_rev= comment.pull_request.org_ref.split(':')
+                    comment_url = pull_request.url(canonical=True,
+                                                   anchor='comment-%s' % comment.comment_id)
+                    kw = dict(
+                        comment=text,
+                        line_no=line_no,
+                        status_change=status_change,
+                        comment_user=user.username,
+                        comment_url=comment_url,
+                        org_ref=org_ref_name,
+                        org_repo_owner=pull_request.org_repo.user.username,
+                        other_repo_name=pull_request.other_repo.repo_name,
+                        other_repo_owner=pull_request.other_repo.user.username,
+                        pr_title=pull_request.title,
+                        pr_nice_id=pull_request.nice_id(),
+                        pr_owner=pull_request.owner.username,
+                        closing_pr=closing_pr,
+                    )
+                    callback(**kw)
+
             (subj, body, recipients, notification_type,
              email_kwargs) = self._get_notification_data(
                                 repo, comment, user,
