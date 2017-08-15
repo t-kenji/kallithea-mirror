@@ -162,7 +162,7 @@ div.readme .readme_box pre,
 div.rst-block pre,
 .CodeMirror .CodeMirror-code pre {
     font-size: 12px;
-    font-family: Lucida Console, Consolas, Monaco, Inconsolata, Liberation Mono, monospace;
+    font-family: Inconsolata, 'Noto Sans Mono Japanese', Lucida Console, Consolas, Monaco, Liberation Mono, monospace;
 }
 
 .top-left-rounded-corner {

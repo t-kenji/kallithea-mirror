@@ -1,0 +1,12 @@
+/*!
+ * "Noto Sans Mono Japanese" is licensed under the SIL Open Font License 1.1
+ * by https://www.google.com/get/noto/
+ */
+@font-face {
+  font-family: 'Noto Sans Mono Japanese';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../fonts/NotoSansMonoCJKjp-Regular.woff2') format('woff2'),
+       url('../fonts/NotoSansMonoCJKjp-Regular.woff')  format('woff'),
+       url('../fonts/NotoSansMonoCJKjp-Regular.otf')   format('opentype');
+}
