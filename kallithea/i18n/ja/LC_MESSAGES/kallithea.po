@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Kallithea 0.3\n"
 "Report-Msgid-Bugs-To: translations@kallithea-scm.org\n"
-"POT-Creation-Date: 2017-08-06 04:06+0000\n"
+"POT-Creation-Date: 2018-05-12 03:21+0900\n"
 "PO-Revision-Date: 2016-01-07 01:53+0000\n"
 "Last-Translator: Takumi IINO <trot.thunder@gmail.com>\n"
 "Language-Team: Japanese "
@@ -73,7 +73,7 @@ msgid ""
 "not allowed"
 msgstr "クローズしたプルリクエストに関連するチェンジセットのステータスを変更することは許可されていません"
 
-#: kallithea/controllers/compare.py:165 kallithea/templates/base/root.html:41
+#: kallithea/controllers/compare.py:165 kallithea/templates/base/root.html:43
 msgid "Select changeset"
 msgstr "リビジョンを選択"
 
@@ -1765,7 +1765,7 @@ msgstr "リポジトリグループの書き込みパーミッションを使っ
 msgid "on line %s"
 msgstr "%s 行目"
 
-#: kallithea/model/comment.py:217 kallithea/model/pull_request.py:169
+#: kallithea/model/comment.py:264 kallithea/model/pull_request.py:219
 msgid "[Mention]"
 msgstr "[Mention]"
 
@@ -1971,7 +1971,7 @@ msgstr "%(ref)s から %(repo_name)s へのプルリクエスト #%(pr_nice_id)s
 msgid "Closing"
 msgstr "クローズ"
 
-#: kallithea/model/pull_request.py:137
+#: kallithea/model/pull_request.py:161
 #, python-format
 msgid "%(user)s wants you to review pull request %(pr_nice_id)s: %(pr_title)s"
 msgstr "%(user)s がプリリクエスト #%(pr_nice_id)s: %(pr_title)s のレビューを求めています"
@@ -2327,7 +2327,7 @@ msgstr "所有者"
 #: kallithea/templates/index_base.html:140
 #: kallithea/templates/admin/my_account/my_account_repos.html:57
 #: kallithea/templates/admin/my_account/my_account_watched.html:57
-#: kallithea/templates/base/root.html:43
+#: kallithea/templates/base/root.html:45
 #: kallithea/templates/bookmarks/bookmarks.html:79
 #: kallithea/templates/branches/branches.html:79
 #: kallithea/templates/journal/journal.html:198
@@ -2339,7 +2339,7 @@ msgstr "昇順で並び換え"
 #: kallithea/templates/index_base.html:141
 #: kallithea/templates/admin/my_account/my_account_repos.html:58
 #: kallithea/templates/admin/my_account/my_account_watched.html:58
-#: kallithea/templates/base/root.html:44
+#: kallithea/templates/base/root.html:46
 #: kallithea/templates/bookmarks/bookmarks.html:80
 #: kallithea/templates/branches/branches.html:80
 #: kallithea/templates/journal/journal.html:199
@@ -2355,7 +2355,7 @@ msgstr "リポジトリが見つかりません。"
 #: kallithea/templates/index_base.html:143
 #: kallithea/templates/admin/my_account/my_account_repos.html:60
 #: kallithea/templates/admin/my_account/my_account_watched.html:60
-#: kallithea/templates/base/root.html:46
+#: kallithea/templates/base/root.html:48
 #: kallithea/templates/bookmarks/bookmarks.html:82
 #: kallithea/templates/branches/branches.html:82
 #: kallithea/templates/journal/journal.html:201
@@ -2367,7 +2367,7 @@ msgstr "データエラー"
 #: kallithea/templates/index_base.html:144
 #: kallithea/templates/admin/my_account/my_account_repos.html:61
 #: kallithea/templates/admin/my_account/my_account_watched.html:61
-#: kallithea/templates/base/base.html:140 kallithea/templates/base/root.html:47
+#: kallithea/templates/base/base.html:140 kallithea/templates/base/root.html:49
 #: kallithea/templates/bookmarks/bookmarks.html:83
 #: kallithea/templates/branches/branches.html:83
 #: kallithea/templates/journal/journal.html:202
@@ -2769,7 +2769,7 @@ msgid "Update Gist"
 msgstr "Gistを更新"
 
 #: kallithea/templates/admin/gists/edit.html:146
-#: kallithea/templates/changeset/changeset_file_comment.html:81
+#: kallithea/templates/changeset/changeset_file_comment.html:86
 msgid "Cancel"
 msgstr "キャンセル"
 
@@ -2880,7 +2880,7 @@ msgstr "非公開 Gist"
 #: kallithea/templates/admin/settings/settings_hooks.html:36
 #: kallithea/templates/admin/users/user_edit_emails.html:19
 #: kallithea/templates/admin/users/user_edit_ips.html:22
-#: kallithea/templates/changeset/changeset_file_comment.html:30
+#: kallithea/templates/changeset/changeset_file_comment.html:34
 #: kallithea/templates/data_table/_dt_elements.html:129
 #: kallithea/templates/data_table/_dt_elements.html:157
 #: kallithea/templates/data_table/_dt_elements.html:173
@@ -2900,8 +2900,8 @@ msgstr "このGistを削除してもよろしいですか？"
 #: kallithea/templates/base/perms_summary.html:43
 #: kallithea/templates/base/perms_summary.html:79
 #: kallithea/templates/base/perms_summary.html:81
-#: kallithea/templates/changeset/changeset_file_comment.html:83
-#: kallithea/templates/changeset/changeset_file_comment.html:192
+#: kallithea/templates/changeset/changeset_file_comment.html:88
+#: kallithea/templates/changeset/changeset_file_comment.html:197
 #: kallithea/templates/data_table/_dt_elements.html:122
 #: kallithea/templates/data_table/_dt_elements.html:123
 #: kallithea/templates/data_table/_dt_elements.html:150
@@ -3088,7 +3088,7 @@ msgstr "あなたが所有者のリポジトリ"
 
 #: kallithea/templates/admin/my_account/my_account_repos.html:59
 #: kallithea/templates/admin/my_account/my_account_watched.html:59
-#: kallithea/templates/base/root.html:45
+#: kallithea/templates/base/root.html:47
 #: kallithea/templates/bookmarks/bookmarks.html:81
 #: kallithea/templates/branches/branches.html:81
 #: kallithea/templates/journal/journal.html:200
@@ -4602,85 +4602,85 @@ msgstr "権限を編集"
 msgid "No permission defined"
 msgstr "権限が設定されていません"
 
-#: kallithea/templates/base/root.html:22
+#: kallithea/templates/base/root.html:24
 msgid "Add Another Comment"
 msgstr "別のコメントを追加"
 
-#: kallithea/templates/base/root.html:23
+#: kallithea/templates/base/root.html:25
 #: kallithea/templates/data_table/_dt_elements.html:214
 msgid "Stop following this repository"
 msgstr "このリポジトリのフォローをやめる"
 
-#: kallithea/templates/base/root.html:24
+#: kallithea/templates/base/root.html:26
 msgid "Start following this repository"
 msgstr "このリポジトリのフォローする"
 
-#: kallithea/templates/base/root.html:25
+#: kallithea/templates/base/root.html:27
 msgid "Group"
 msgstr "グループ"
 
-#: kallithea/templates/base/root.html:26
+#: kallithea/templates/base/root.html:28
 msgid "members"
 msgstr "メンバー"
 
-#: kallithea/templates/base/root.html:27
+#: kallithea/templates/base/root.html:29
 msgid "Loading ..."
 msgstr "読み込み中..."
 
-#: kallithea/templates/base/root.html:28
+#: kallithea/templates/base/root.html:30
 msgid "loading ..."
 msgstr "読み込み中..."
 
-#: kallithea/templates/base/root.html:29
+#: kallithea/templates/base/root.html:31
 msgid "Search truncated"
 msgstr "検索結果は省略されています"
 
-#: kallithea/templates/base/root.html:30
+#: kallithea/templates/base/root.html:32
 msgid "No matching files"
 msgstr "マッチするファイルはありません"
 
-#: kallithea/templates/base/root.html:31
+#: kallithea/templates/base/root.html:33
 msgid "Open New Pull Request from {0}"
 msgstr "新しいプルリクエストを{0}から作成"
 
-#: kallithea/templates/base/root.html:32
+#: kallithea/templates/base/root.html:34
 msgid "Open New Pull Request for {0} &rarr; {1}"
 msgstr "{0} &rarr; {1}から新しいプルリクエストを作成する"
 
-#: kallithea/templates/base/root.html:33
+#: kallithea/templates/base/root.html:35
 msgid "Show Selected Changesets {0} &rarr; {1}"
 msgstr "選択したチェンジセット{0} &rarr; {0}を表示"
 
-#: kallithea/templates/base/root.html:34
+#: kallithea/templates/base/root.html:36
 msgid "Selection Link"
 msgstr "選択リンク"
 
-#: kallithea/templates/base/root.html:35
+#: kallithea/templates/base/root.html:37
 #: kallithea/templates/changeset/diff_block.html:8
 msgid "Collapse Diff"
 msgstr "差分をたたむ"
 
-#: kallithea/templates/base/root.html:36
+#: kallithea/templates/base/root.html:38
 msgid "Expand Diff"
 msgstr "差分を表示"
 
-#: kallithea/templates/base/root.html:37
+#: kallithea/templates/base/root.html:39
 msgid "Failed to revoke permission"
 msgstr "権限の取消に失敗しました"
 
-#: kallithea/templates/base/root.html:38
+#: kallithea/templates/base/root.html:40
 msgid "Confirm to revoke permission for {0}: {1} ?"
 msgstr "権限 {0}: {1} を取り消してもよろしいですか？"
 
-#: kallithea/templates/base/root.html:39
+#: kallithea/templates/base/root.html:41
 msgid "enabled"
 msgstr "有効"
 
-#: kallithea/templates/base/root.html:40
+#: kallithea/templates/base/root.html:42
 msgid "disabled"
 msgstr "無効"
 
-#: kallithea/templates/base/root.html:42
+#: kallithea/templates/base/root.html:44
 msgid "Specify changeset"
 msgstr "チェンジセットを指定"
 
@@ -4888,7 +4888,7 @@ msgid "Child rev."
 msgstr "子リビジョン"
 
 #: kallithea/templates/changeset/changeset.html:50
-#: kallithea/templates/changeset/changeset_file_comment.html:37
+#: kallithea/templates/changeset/changeset_file_comment.html:42
 #: kallithea/templates/changeset/changeset_range.html:48
 msgid "Changeset status"
 msgstr "チェンジセットステータス"
@@ -4970,94 +4970,98 @@ msgstr "無題"
 msgid "on this changeset"
 msgstr "on チェンジセット"
 
-#: kallithea/templates/changeset/changeset_file_comment.html:30
+#: kallithea/templates/changeset/changeset_file_comment.html:31
+msgid "Reply"
+msgstr "返信"
+
+#: kallithea/templates/changeset/changeset_file_comment.html:34
 msgid "Delete comment?"
 msgstr "コメントを削除しますか？"
 
-#: kallithea/templates/changeset/changeset_file_comment.html:37
+#: kallithea/templates/changeset/changeset_file_comment.html:42
 msgid "Status change"
 msgstr "ステータスを変更"
 
-#: kallithea/templates/changeset/changeset_file_comment.html:59
+#: kallithea/templates/changeset/changeset_file_comment.html:64
 msgid "Commenting on line {1}."
 msgstr "{1} 行目にコメント"
 
-#: kallithea/templates/changeset/changeset_file_comment.html:60
-#: kallithea/templates/changeset/changeset_file_comment.html:148
+#: kallithea/templates/changeset/changeset_file_comment.html:65
+#: kallithea/templates/changeset/changeset_file_comment.html:153
 #, python-format
 msgid "Comments parsed using %s syntax with %s support."
 msgstr "コメントには %s 構文 ( %s サポートつき ) が利用できます。"
 
-#: kallithea/templates/changeset/changeset_file_comment.html:62
+#: kallithea/templates/changeset/changeset_file_comment.html:67
 msgid "Use @username inside this text to notify another user"
 msgstr "テキスト内で @username を使うと、そのユーザーに通知されます"
 
-#: kallithea/templates/changeset/changeset_file_comment.html:72
-#: kallithea/templates/changeset/changeset_file_comment.html:184
+#: kallithea/templates/changeset/changeset_file_comment.html:77
+#: kallithea/templates/changeset/changeset_file_comment.html:189
 msgid "Comment preview"
 msgstr "コメントのプレビュー"
 
-#: kallithea/templates/changeset/changeset_file_comment.html:77
+#: kallithea/templates/changeset/changeset_file_comment.html:82
 msgid "Submitting ..."
 msgstr "送信中..."
 
-#: kallithea/templates/changeset/changeset_file_comment.html:80
-#: kallithea/templates/changeset/changeset_file_comment.html:190
+#: kallithea/templates/changeset/changeset_file_comment.html:85
+#: kallithea/templates/changeset/changeset_file_comment.html:195
 msgid "Comment"
 msgstr "コメント"
 
-#: kallithea/templates/changeset/changeset_file_comment.html:82
-#: kallithea/templates/changeset/changeset_file_comment.html:191
+#: kallithea/templates/changeset/changeset_file_comment.html:87
+#: kallithea/templates/changeset/changeset_file_comment.html:196
 msgid "Preview"
 msgstr "プレビュー"
 
-#: kallithea/templates/changeset/changeset_file_comment.html:90
+#: kallithea/templates/changeset/changeset_file_comment.html:95
 msgid "You need to be logged in to comment."
 msgstr "コメントにはログインする必要があります。"
 
-#: kallithea/templates/changeset/changeset_file_comment.html:90
+#: kallithea/templates/changeset/changeset_file_comment.html:95
 msgid "Login now"
 msgstr "今すぐログインする"
 
-#: kallithea/templates/changeset/changeset_file_comment.html:94
+#: kallithea/templates/changeset/changeset_file_comment.html:99
 msgid "Hide"
 msgstr "隠す"
 
-#: kallithea/templates/changeset/changeset_file_comment.html:106
+#: kallithea/templates/changeset/changeset_file_comment.html:111
 #, python-format
 msgid "%d comment"
 msgid_plural "%d comments"
 msgstr[0] "%d 個のコメント"
 
-#: kallithea/templates/changeset/changeset_file_comment.html:107
+#: kallithea/templates/changeset/changeset_file_comment.html:112
 #, python-format
 msgid "%d inline"
 msgid_plural "%d inline"
 msgstr[0] "%d inline"
 
-#: kallithea/templates/changeset/changeset_file_comment.html:108
+#: kallithea/templates/changeset/changeset_file_comment.html:113
 #, python-format
 msgid "%d general"
 msgid_plural "%d general"
 msgstr[0] "%d general"
 
-#: kallithea/templates/changeset/changeset_file_comment.html:150
+#: kallithea/templates/changeset/changeset_file_comment.html:155
 msgid "Use @username inside this text to notify another user."
 msgstr "テキスト内で @username を使うと、そのユーザーに通知されます。"
 
-#: kallithea/templates/changeset/changeset_file_comment.html:157
+#: kallithea/templates/changeset/changeset_file_comment.html:162
 msgid "Vote for pull request status"
 msgstr "プルリクエストステータスの投票"
 
-#: kallithea/templates/changeset/changeset_file_comment.html:159
+#: kallithea/templates/changeset/changeset_file_comment.html:164
 msgid "Set changeset status"
 msgstr "リビジョンステータスを設定"
 
-#: kallithea/templates/changeset/changeset_file_comment.html:163
+#: kallithea/templates/changeset/changeset_file_comment.html:168
 msgid "No change"
 msgstr "変更なし"
 
-#: kallithea/templates/changeset/changeset_file_comment.html:176
+#: kallithea/templates/changeset/changeset_file_comment.html:181
 msgid "Close"
 msgstr "クローズ"
 

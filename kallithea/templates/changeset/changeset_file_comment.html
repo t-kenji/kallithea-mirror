@@ -26,11 +26,16 @@
               <a class="permalink" href="${co.url()}">&para;</a>
           </span>
 
-          %if h.HasPermissionAny('hg.admin')() or h.HasRepoPermissionAny('repository.admin')(c.repo_name) or co.author.user_id == c.authuser.user_id:
-            <div onClick="confirm('${_("Delete comment?")}') && deleteComment(${co.comment_id})" class="buttons delete-comment btn btn-mini">${_('Delete')}</div>
-          %endif
+          <div class="buttons">
+              %if c.authuser.username != 'default':
+              <div data-replyto="${co.comment_id}" class="reply-comment btn btn-mini hidden">${_('Reply')}</div>
+              %endif
+              %if h.HasPermissionAny('hg.admin')() or h.HasRepoPermissionAny('repository.admin')(c.repo_name) or co.author.user_id == c.authuser.user_id:
+              <div onClick="confirm('${_("Delete comment?")}') && deleteComment(${co.comment_id})" class="delete-comment btn btn-mini">${_('Delete')}</div>
+              %endif
+          </div>
       </div>
-      <div class="text">
+      <div class="text" data-comment-id="comment-${co.comment_id}">
         %if co.status_change:
            <div class="rst-block automatic-comment">
              <p>
@@ -243,6 +248,10 @@ $(document).ready(function () {
        $('#preview-container').hide();
        $('#preview-btn').show();
    });
+   $('.comments-list-general div[id^="comment-"] .reply-comment').click(function () {
+       var replyto = $(this).data('replyto');
+       $('#main_form #text').focus().text('`replyto comment-' + replyto + ' <#comment-' + replyto + '>`_ :\n\n');
+   }).removeClass('hidden');
 
 });
 </script>

@@ -3440,6 +3440,7 @@ label.disabled {
     color: #aaa;
 }
 
+.btn.hidden,
 .btn.blue.hidden {
     display: none;
 }
@@ -4134,6 +4135,13 @@ div.rst-block pre {
 }
 .comment .text div.rst-block p {
     margin: 0.5em 0px !important;
+}
+
+.comment .text::after {
+    content: attr(data-comment-id);
+    color: #666;
+    float: right;
+    margin: -1.3em 0.75em 0 0;
 }
 
 .comments-number {

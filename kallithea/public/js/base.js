@@ -622,6 +622,12 @@ function move_comments($anchorcomments) {
         if ($comment_div[0]) {
             $comment_div.append($anchorcomment.children());
             _comment_div_append_add($comment_div, f_path, line_no);
+
+            $comment_div.find('div[id^="comment-"] .reply-comment').click(function () {
+                comment_div_state($comment_div, f_path, line_no, true);
+                var replyto = $(this).data('replyto');
+                $comment_div.find('textarea').text('`replyto comment-' + replyto + ' <#comment-' + replyto + '>`_ :\n\n');
+            }).removeClass('hidden');
         } else {
            $anchorcomment.before("Comment to {0} line {1} which is outside the diff context:".format(f_path || '?', line_no || '?'));
         }
@@ -699,6 +705,11 @@ function _comment_div_append_form($comment_div, f_path, line_no) {
 
         var success = function(json_data) {
             $comment_div.append(json_data['rendered_text']);
+            $comment_div.find('div[id^="comment-"] .reply-comment').click(function () {
+                comment_div_state($comment_div, f_path, line_no, true);
+                var replyto = $(this).data('replyto');
+                $comment_div.find('textarea').text('`replyto comment-' + replyto + ' <#comment-' + replyto + '>`_ :\n\n');
+            }).removeClass('hidden');
             comment_div_state($comment_div, f_path, line_no, false);
             linkInlineComments($('.firstlink'), $('.comment:first-child'));
         };

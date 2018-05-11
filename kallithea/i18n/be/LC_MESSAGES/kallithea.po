@@ -7,21 +7,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Kallithea 0.3\n"
 "Report-Msgid-Bugs-To: translations@kallithea-scm.org\n"
-"POT-Creation-Date: 2017-07-25 16:37+0200\n"
+"POT-Creation-Date: 2018-05-12 03:21+0900\n"
 "PO-Revision-Date: 2017-04-22 21:08+0000\n"
 "Last-Translator: Viktar Vauchkevich <victorenator@gmail.com>\n"
 "Language-Team: Belarusian "
 "<https://hosted.weblate.org/projects/kallithea/stable/be/>\n"
-"Language: be\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
-"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 2.14-dev\n"
+"Generated-By: Babel 1.3\n"
 
 #: kallithea/controllers/changelog.py:86
-#: kallithea/controllers/pullrequests.py:238 kallithea/lib/base.py:512
+#: kallithea/controllers/pullrequests.py:257 kallithea/lib/base.py:512
 msgid "There are no changesets yet"
 msgstr "Яшчэ не было змен"
 
@@ -37,7 +36,7 @@ msgstr "Яшчэ не было змен"
 msgid "None"
 msgstr "Нічога"
 
-#: kallithea/controllers/changelog.py:168 kallithea/controllers/files.py:196
+#: kallithea/controllers/changelog.py:168 kallithea/controllers/files.py:197
 msgid "(closed)"
 msgstr "(зачынена)"
 
@@ -56,21 +55,27 @@ msgid "Increase diff context to %(num)s lines"
 msgstr "Павялічыць кантэкст да %(num)s радкоў"
 
 #: kallithea/controllers/changeset.py:212 kallithea/controllers/files.py:96
-#: kallithea/controllers/files.py:116 kallithea/controllers/files.py:742
+#: kallithea/controllers/files.py:116 kallithea/controllers/files.py:743
 msgid "Such revision does not exist for this repository"
 msgstr "Няма такой рэвізіі ў гэтым рэпазітары"
 
-#: kallithea/controllers/changeset.py:383
+#: kallithea/controllers/changeset.py:218
+#, fuzzy
+#| msgid "Such revision does not exist for this repository"
+msgid "Such revision has multiple candidates for this repository"
+msgstr "Няма такой рэвізіі ў гэтым рэпазітары"
+
+#: kallithea/controllers/changeset.py:389
 msgid ""
 "Changing status on a changeset associated with a closed pull request is "
 "not allowed"
 msgstr "Нельга рэдагаваць статус змен, злучаных з зачыненымі pull-request'ами"
 
-#: kallithea/controllers/compare.py:161 kallithea/templates/base/root.html:41
+#: kallithea/controllers/compare.py:165 kallithea/templates/base/root.html:43
 msgid "Select changeset"
 msgstr "Выбраць набор змен"
 
-#: kallithea/controllers/compare.py:261
+#: kallithea/controllers/compare.py:265
 msgid "Cannot compare repositories without using common ancestor"
 msgstr "Немагчыма параўноўваць рэпазітары без агульнага продка"
 
@@ -121,8 +126,8 @@ msgstr "Стужка навін %s %s"
 #: kallithea/templates/changeset/changeset.html:195
 #: kallithea/templates/compare/compare_diff.html:78
 #: kallithea/templates/compare/compare_diff.html:89
-#: kallithea/templates/pullrequests/pullrequest_show.html:339
-#: kallithea/templates/pullrequests/pullrequest_show.html:363
+#: kallithea/templates/pullrequests/pullrequest_show.html:346
+#: kallithea/templates/pullrequests/pullrequest_show.html:370
 msgid "Changeset was too big and was cut off..."
 msgstr "Змены апынуліся занадта вялікімі і былі выразаныя..."
 
@@ -142,101 +147,101 @@ msgstr "Няма файлаў. %s"
 
 #: kallithea/controllers/files.py:193
 #, python-format
-msgid "%s at %s"
-msgstr "%s (%s)"
+msgid "%(branch)s at %(raw_id)s"
+msgstr ""
 
-#: kallithea/controllers/files.py:305 kallithea/controllers/files.py:365
-#: kallithea/controllers/files.py:432
+#: kallithea/controllers/files.py:306 kallithea/controllers/files.py:366
+#: kallithea/controllers/files.py:433
 #, python-format
 msgid "This repository has been locked by %s on %s"
 msgstr "Рэпазітар заблакаваў %s у %s"
 
-#: kallithea/controllers/files.py:317
+#: kallithea/controllers/files.py:318
 msgid "You can only delete files with revision being a valid branch"
 msgstr "Вы можаце выдаляць файлы толькі ў рэвізіі, злучанай з існай галінкай"
 
-#: kallithea/controllers/files.py:328
+#: kallithea/controllers/files.py:329
 #, python-format
 msgid "Deleted file %s via Kallithea"
 msgstr "Файл %s выдалены з дапамогай Kallithea"
 
-#: kallithea/controllers/files.py:350
+#: kallithea/controllers/files.py:351
 #, python-format
 msgid "Successfully deleted file %s"
 msgstr "Файл %s выдалены"
 
-#: kallithea/controllers/files.py:354 kallithea/controllers/files.py:420
-#: kallithea/controllers/files.py:501
+#: kallithea/controllers/files.py:355 kallithea/controllers/files.py:421
+#: kallithea/controllers/files.py:502
 msgid "Error occurred during commit"
 msgstr "Падчас каміта адбылася памылка"
 
-#: kallithea/controllers/files.py:377
+#: kallithea/controllers/files.py:378
 msgid "You can only edit files with revision being a valid branch"
 msgstr "Вы можаце рэдагаваць файлы толькі ў рэвізіі, злучанай з існай галінкай"
 
-#: kallithea/controllers/files.py:391
+#: kallithea/controllers/files.py:392
 #, python-format
 msgid "Edited file %s via Kallithea"
 msgstr "Файл %s адрэдагаваны з дапамогай Kallithea"
 
-#: kallithea/controllers/files.py:407
+#: kallithea/controllers/files.py:408
 msgid "No changes"
 msgstr "Без змен"
 
-#: kallithea/controllers/files.py:416 kallithea/controllers/files.py:490
+#: kallithea/controllers/files.py:417 kallithea/controllers/files.py:491
 #, python-format
 msgid "Successfully committed to %s"
 msgstr "Змены ўжыты ў %s"
 
-#: kallithea/controllers/files.py:443
+#: kallithea/controllers/files.py:444
 msgid "Added file via Kallithea"
 msgstr "Файл дададзены з дапамогай Kallithea"
 
-#: kallithea/controllers/files.py:464
+#: kallithea/controllers/files.py:465
 msgid "No content"
 msgstr "Пуста"
 
-#: kallithea/controllers/files.py:468
+#: kallithea/controllers/files.py:469
 msgid "No filename"
 msgstr "Безназоўны"
 
-#: kallithea/controllers/files.py:493
+#: kallithea/controllers/files.py:494
 msgid "Location must be relative path and must not contain .. in path"
 msgstr ""
 "Размяшчэнне павінна быць адносным шляхам, і не можа ўтрымліваць \"..\" у "
 "шляхі"
 
-#: kallithea/controllers/files.py:526
+#: kallithea/controllers/files.py:527
 msgid "Downloads disabled"
 msgstr "Магчымасць спампоўваць адключана"
 
-#: kallithea/controllers/files.py:537
+#: kallithea/controllers/files.py:538
 #, python-format
 msgid "Unknown revision %s"
 msgstr "Невядомая рэвізія %s"
 
-#: kallithea/controllers/files.py:539
+#: kallithea/controllers/files.py:540
 msgid "Empty repository"
 msgstr "Пусты рэпазітар"
 
-#: kallithea/controllers/files.py:541
+#: kallithea/controllers/files.py:542
 msgid "Unknown archive type"
 msgstr "Невядомы тып архіва"
 
-#: kallithea/controllers/files.py:771
+#: kallithea/controllers/files.py:772
 #: kallithea/templates/changeset/changeset_range.html:9
 #: kallithea/templates/email_templates/pull_request.html:15
 #: kallithea/templates/pullrequests/pullrequest.html:97
 msgid "Changesets"
 msgstr "Набор змен"
 
-#: kallithea/controllers/files.py:772 kallithea/controllers/pullrequests.py:176
+#: kallithea/controllers/files.py:773 kallithea/controllers/pullrequests.py:186
 #: kallithea/model/scm.py:820 kallithea/templates/switch_to_list.html:3
 #: kallithea/templates/branches/branches.html:10
 msgid "Branches"
 msgstr "Галінкі"
 
-#: kallithea/controllers/files.py:773 kallithea/controllers/pullrequests.py:177
+#: kallithea/controllers/files.py:774 kallithea/controllers/pullrequests.py:187
 #: kallithea/model/scm.py:831 kallithea/templates/switch_to_list.html:25
 #: kallithea/templates/tags/tags.html:10
 msgid "Tags"
@@ -313,131 +318,156 @@ msgstr "Няспраўны код для скідання пароля"
 msgid "Successfully updated password"
 msgstr "Пароль абноўлены"
 
-#: kallithea/controllers/pullrequests.py:124
+#: kallithea/controllers/pullrequests.py:131
 #, python-format
 msgid "%s (closed)"
 msgstr "%s (зачынена)"
 
-#: kallithea/controllers/pullrequests.py:152
+#: kallithea/controllers/pullrequests.py:159
 #: kallithea/templates/changeset/changeset.html:12
 #: kallithea/templates/email_templates/changeset_comment.html:17
 msgid "Changeset"
 msgstr "Змены"
 
-#: kallithea/controllers/pullrequests.py:173
+#: kallithea/controllers/pullrequests.py:183
 msgid "Special"
 msgstr "Адмысловы"
 
-#: kallithea/controllers/pullrequests.py:174
+#: kallithea/controllers/pullrequests.py:184
 msgid "Peer branches"
 msgstr "Галінкі ўдзельніка"
 
-#: kallithea/controllers/pullrequests.py:175 kallithea/model/scm.py:826
+#: kallithea/controllers/pullrequests.py:185 kallithea/model/scm.py:826
 #: kallithea/templates/switch_to_list.html:38
 #: kallithea/templates/bookmarks/bookmarks.html:10
 msgid "Bookmarks"
 msgstr "Закладкі"
 
-#: kallithea/controllers/pullrequests.py:310
+#: kallithea/controllers/pullrequests.py:329
 #, python-format
 msgid "Error creating pull request: %s"
 msgstr "Памылка пры стварэнні pull-запыту: %s"
 
-#: kallithea/controllers/pullrequests.py:356
-#: kallithea/controllers/pullrequests.py:503
+#: kallithea/controllers/pullrequests.py:375
+#: kallithea/controllers/pullrequests.py:522
 msgid "No description"
 msgstr "Няма апісання"
 
-#: kallithea/controllers/pullrequests.py:363
+#: kallithea/controllers/pullrequests.py:382
 msgid "Successfully opened new pull request"
 msgstr "Pull-запыт створаны паспяхова"
 
-#: kallithea/controllers/pullrequests.py:366
-#: kallithea/controllers/pullrequests.py:453
-#: kallithea/controllers/pullrequests.py:510
+#: kallithea/controllers/pullrequests.py:385
+#: kallithea/controllers/pullrequests.py:472
+#: kallithea/controllers/pullrequests.py:529
 #, python-format
 msgid "Invalid reviewer \"%s\" specified"
 msgstr ""
 
-#: kallithea/controllers/pullrequests.py:369
-#: kallithea/controllers/pullrequests.py:456
+#: kallithea/controllers/pullrequests.py:388
+#: kallithea/controllers/pullrequests.py:475
 msgid "Error occurred while creating pull request"
 msgstr "Адбылася памылка пры стварэнні pull-запыту"
 
-#: kallithea/controllers/pullrequests.py:401
+#: kallithea/controllers/pullrequests.py:414
+#, python-format
+msgid "This is an update of %s \"%s\"."
+msgstr ""
+
+#: kallithea/controllers/pullrequests.py:420
 msgid "Missing changesets since the previous pull request:"
 msgstr "Адсутныя рэвізіі адносна папярэдняга pull-запыту:"
 
-#: kallithea/controllers/pullrequests.py:408
+#: kallithea/controllers/pullrequests.py:427
 #, python-format
 msgid "New changesets on %s %s since the previous pull request:"
 msgstr "Новыя рэвізіі на %s %s адносна папярэдняга pull-запыту:"
 
-#: kallithea/controllers/pullrequests.py:415
+#: kallithea/controllers/pullrequests.py:434
 msgid "Ancestor didn't change - show diff since previous version:"
 msgstr ""
 
-#: kallithea/controllers/pullrequests.py:422
+#: kallithea/controllers/pullrequests.py:441
 #, python-format
 msgid ""
 "This pull request is based on another %s revision and there is no simple "
 "diff."
 msgstr "Гэты pull-запыт заснаваны на іншай рэвізіі %s, просты diff немагчымы."
 
-#: kallithea/controllers/pullrequests.py:424
+#: kallithea/controllers/pullrequests.py:443
 #, python-format
 msgid "No changes found on %s %s since previous version."
 msgstr "Няма змен на %s %s адносна папярэдняй версіі."
 
-#: kallithea/controllers/pullrequests.py:462
+#: kallithea/controllers/pullrequests.py:481
 #, python-format
 msgid "Closed, replaced by %s ."
 msgstr "Зачынены, замешчаны %s."
 
-#: kallithea/controllers/pullrequests.py:470
+#: kallithea/controllers/pullrequests.py:489
 msgid "Pull request update created"
 msgstr "Абнаўленне для pull-запыту створана"
 
-#: kallithea/controllers/pullrequests.py:514
+#: kallithea/controllers/pullrequests.py:533
 msgid "Pull request updated"
 msgstr "Pull-запыт абноўлены"
 
-#: kallithea/controllers/pullrequests.py:529
+#: kallithea/controllers/pullrequests.py:548
 msgid "Successfully deleted pull request"
 msgstr "Pull-запыт паспяхова выдалены"
 
-#: kallithea/controllers/pullrequests.py:595
+#: kallithea/controllers/pullrequests.py:627
 #, python-format
 msgid "This pull request has already been merged to %s."
 msgstr "Гэты pull-запыт ужо прыняты на галінку %s."
 
-#: kallithea/controllers/pullrequests.py:597
+#: kallithea/controllers/pullrequests.py:629
 msgid "This pull request has been closed and can not be updated."
 msgstr "Гэты pull-запыт быў зачынены і не можа быць абноўлены."
 
-#: kallithea/controllers/pullrequests.py:615
+#: kallithea/controllers/pullrequests.py:631
+msgid "Cannot update pull request not created on branch head for git"
+msgstr ""
+
+#: kallithea/controllers/pullrequests.py:649
 #, python-format
 msgid "This pull request can be updated with changes on %s:"
 msgstr "Гэты pull-запыт можа быць абноўлены з %s:"
 
-#: kallithea/controllers/pullrequests.py:619
+#: kallithea/controllers/pullrequests.py:653
 msgid "No changesets found for updating this pull request."
 msgstr "Няма змен для абнаўлення гэтага pull-запыту."
 
-#: kallithea/controllers/pullrequests.py:627
+#: kallithea/controllers/pullrequests.py:661
 #, python-format
 msgid "Note: Branch %s has another head: %s."
 msgstr "Увага: Галінка %s мае яшчэ адну верхавіну: %s."
 
-#: kallithea/controllers/pullrequests.py:633
-msgid "Git pull requests don't support updates yet."
-msgstr "Абнаўленне pull-запытаў git не падтрымліваецца."
+#: kallithea/controllers/pullrequests.py:669
+#, python-format
+msgid "The following additional changes are available on %s:"
+msgstr ""
 
-#: kallithea/controllers/pullrequests.py:724
+#: kallithea/controllers/pullrequests.py:673
+#, fuzzy
+#| msgid "No changesets found for updating this pull request."
+msgid "No additional changesets found for iterating on this pull request."
+msgstr "Няма змен для абнаўлення гэтага pull-запыту."
+
+#: kallithea/controllers/pullrequests.py:677
+#, python-format
+msgid "Error: revision %s was not found. Please create a new pull request!"
+msgstr ""
+
+#: kallithea/controllers/pullrequests.py:702
+msgid "The diff can't be shown - the PR revisions could not be found."
+msgstr ""
+
+#: kallithea/controllers/pullrequests.py:778
 msgid "No permission to change pull request status"
 msgstr "Няма правоў змяняць статус pull-запыту"
 
-#: kallithea/controllers/pullrequests.py:729
+#: kallithea/controllers/pullrequests.py:783
 msgid "Closing."
 msgstr "Зачынены."
 
@@ -1215,7 +1245,7 @@ msgstr " і на %s больш"
 
 #: kallithea/lib/helpers.py:1129
 #: kallithea/templates/compare/compare_diff.html:65
-#: kallithea/templates/pullrequests/pullrequest_show.html:326
+#: kallithea/templates/pullrequests/pullrequest_show.html:333
 msgid "No files"
 msgstr "Няма файлаў"
 
@@ -1758,7 +1788,7 @@ msgstr ""
 msgid "on line %s"
 msgstr "на радку %s"
 
-#: kallithea/model/comment.py:217 kallithea/model/pull_request.py:169
+#: kallithea/model/comment.py:264 kallithea/model/pull_request.py:219
 msgid "[Mention]"
 msgstr "[Згадванне]"
 
@@ -1966,7 +1996,7 @@ msgstr "[пракаменціравана] у запыце на занясенн
 msgid "Closing"
 msgstr "Зачынены"
 
-#: kallithea/model/pull_request.py:137
+#: kallithea/model/pull_request.py:161
 #, python-format
 msgid "%(user)s wants you to review pull request %(pr_nice_id)s: %(pr_title)s"
 msgstr "%(user)s просіць вас разгледзець pull request %(pr_nice_id)s: %(pr_title)s"
@@ -2332,9 +2362,9 @@ msgstr "Стан"
 #: kallithea/templates/admin/repos/repos.html:50
 #: kallithea/templates/admin/user_groups/user_group_edit_advanced.html:8
 #: kallithea/templates/admin/user_groups/user_groups.html:50
-#: kallithea/templates/pullrequests/pullrequest_data.html:16
+#: kallithea/templates/pullrequests/pullrequest_data.html:21
 #: kallithea/templates/pullrequests/pullrequest_show.html:156
-#: kallithea/templates/pullrequests/pullrequest_show.html:233
+#: kallithea/templates/pullrequests/pullrequest_show.html:240
 #: kallithea/templates/summary/summary.html:134
 msgid "Owner"
 msgstr "Уладальнік"
@@ -2342,7 +2372,7 @@ msgstr "Уладальнік"
 #: kallithea/templates/index_base.html:140
 #: kallithea/templates/admin/my_account/my_account_repos.html:57
 #: kallithea/templates/admin/my_account/my_account_watched.html:57
-#: kallithea/templates/base/root.html:43
+#: kallithea/templates/base/root.html:45
 #: kallithea/templates/bookmarks/bookmarks.html:79
 #: kallithea/templates/branches/branches.html:79
 #: kallithea/templates/journal/journal.html:198
@@ -2354,7 +2384,7 @@ msgstr "Па ўзрастанні"
 #: kallithea/templates/index_base.html:141
 #: kallithea/templates/admin/my_account/my_account_repos.html:58
 #: kallithea/templates/admin/my_account/my_account_watched.html:58
-#: kallithea/templates/base/root.html:44
+#: kallithea/templates/base/root.html:46
 #: kallithea/templates/bookmarks/bookmarks.html:80
 #: kallithea/templates/branches/branches.html:80
 #: kallithea/templates/journal/journal.html:199
@@ -2370,7 +2400,7 @@ msgstr "Рэпазітары не знойдзены."
 #: kallithea/templates/index_base.html:143
 #: kallithea/templates/admin/my_account/my_account_repos.html:60
 #: kallithea/templates/admin/my_account/my_account_watched.html:60
-#: kallithea/templates/base/root.html:46
+#: kallithea/templates/base/root.html:48
 #: kallithea/templates/bookmarks/bookmarks.html:82
 #: kallithea/templates/branches/branches.html:82
 #: kallithea/templates/journal/journal.html:201
@@ -2382,7 +2412,7 @@ msgstr "Памылка дадзеных."
 #: kallithea/templates/index_base.html:144
 #: kallithea/templates/admin/my_account/my_account_repos.html:61
 #: kallithea/templates/admin/my_account/my_account_watched.html:61
-#: kallithea/templates/base/base.html:140 kallithea/templates/base/root.html:47
+#: kallithea/templates/base/base.html:140 kallithea/templates/base/root.html:49
 #: kallithea/templates/bookmarks/bookmarks.html:83
 #: kallithea/templates/branches/branches.html:83
 #: kallithea/templates/journal/journal.html:202
@@ -2786,7 +2816,7 @@ msgid "Update Gist"
 msgstr "Абнавіць"
 
 #: kallithea/templates/admin/gists/edit.html:146
-#: kallithea/templates/changeset/changeset_file_comment.html:81
+#: kallithea/templates/changeset/changeset_file_comment.html:86
 msgid "Cancel"
 msgstr "Адмена"
 
@@ -2897,7 +2927,7 @@ msgstr ""
 #: kallithea/templates/admin/settings/settings_hooks.html:36
 #: kallithea/templates/admin/users/user_edit_emails.html:19
 #: kallithea/templates/admin/users/user_edit_ips.html:22
-#: kallithea/templates/changeset/changeset_file_comment.html:30
+#: kallithea/templates/changeset/changeset_file_comment.html:34
 #: kallithea/templates/data_table/_dt_elements.html:129
 #: kallithea/templates/data_table/_dt_elements.html:157
 #: kallithea/templates/data_table/_dt_elements.html:173
@@ -2905,7 +2935,7 @@ msgstr ""
 #: kallithea/templates/files/files_source.html:39
 #: kallithea/templates/files/files_source.html:42
 #: kallithea/templates/files/files_source.html:45
-#: kallithea/templates/pullrequests/pullrequest_data.html:20
+#: kallithea/templates/pullrequests/pullrequest_data.html:26
 msgid "Delete"
 msgstr "Выдаліць"
 
@@ -2917,8 +2947,8 @@ msgstr "Пацвердзіце выдаленне гэтай gist-запісы"
 #: kallithea/templates/base/perms_summary.html:43
 #: kallithea/templates/base/perms_summary.html:79
 #: kallithea/templates/base/perms_summary.html:81
-#: kallithea/templates/changeset/changeset_file_comment.html:83
-#: kallithea/templates/changeset/changeset_file_comment.html:192
+#: kallithea/templates/changeset/changeset_file_comment.html:88
+#: kallithea/templates/changeset/changeset_file_comment.html:197
 #: kallithea/templates/data_table/_dt_elements.html:122
 #: kallithea/templates/data_table/_dt_elements.html:123
 #: kallithea/templates/data_table/_dt_elements.html:150
@@ -3107,7 +3137,7 @@ msgstr "Рэпазітары, дзе Вы — уладальнік"
 
 #: kallithea/templates/admin/my_account/my_account_repos.html:59
 #: kallithea/templates/admin/my_account/my_account_watched.html:59
-#: kallithea/templates/base/root.html:45
+#: kallithea/templates/base/root.html:47
 #: kallithea/templates/bookmarks/bookmarks.html:81
 #: kallithea/templates/branches/branches.html:81
 #: kallithea/templates/journal/journal.html:200
@@ -4642,87 +4672,87 @@ msgstr "Змяніць прывілеі"
 msgid "No permission defined"
 msgstr ""
 
-#: kallithea/templates/base/root.html:22
+#: kallithea/templates/base/root.html:24
 msgid "Add Another Comment"
 msgstr "Дадаць яшчэ адзін каментар"
 
-#: kallithea/templates/base/root.html:23
+#: kallithea/templates/base/root.html:25
 #: kallithea/templates/data_table/_dt_elements.html:214
 msgid "Stop following this repository"
 msgstr "Адмяніць назіранне за рэпазітаром"
 
-#: kallithea/templates/base/root.html:24
+#: kallithea/templates/base/root.html:26
 msgid "Start following this repository"
 msgstr "Назіраць за рэпазітаром"
 
-#: kallithea/templates/base/root.html:25
+#: kallithea/templates/base/root.html:27
 msgid "Group"
 msgstr "Група"
 
-#: kallithea/templates/base/root.html:26
+#: kallithea/templates/base/root.html:28
 msgid "members"
 msgstr "удзельнікі"
 
-#: kallithea/templates/base/root.html:27
+#: kallithea/templates/base/root.html:29
 msgid "Loading ..."
 msgstr "Загрузка..."
 
-#: kallithea/templates/base/root.html:28
+#: kallithea/templates/base/root.html:30
 msgid "loading ..."
 msgstr "загрузка..."
 
-#: kallithea/templates/base/root.html:29
+#: kallithea/templates/base/root.html:31
 msgid "Search truncated"
 msgstr "Пошук усечаны"
 
-#: kallithea/templates/base/root.html:30
+#: kallithea/templates/base/root.html:32
 msgid "No matching files"
 msgstr "Няма супадзенняў"
 
-#: kallithea/templates/base/root.html:31
+#: kallithea/templates/base/root.html:33
 #, fuzzy
 msgid "Open New Pull Request from {0}"
 msgstr "Каментар у pull-запыце"
 
-#: kallithea/templates/base/root.html:32
+#: kallithea/templates/base/root.html:34
 msgid "Open New Pull Request for {0} &rarr; {1}"
 msgstr ""
 
-#: kallithea/templates/base/root.html:33
+#: kallithea/templates/base/root.html:35
 #, fuzzy
 msgid "Show Selected Changesets {0} &rarr; {1}"
 msgstr "Паказаць абраныя наборы змен: __S &rarr; __E"
 
-#: kallithea/templates/base/root.html:34
+#: kallithea/templates/base/root.html:36
 msgid "Selection Link"
 msgstr "Спасылка выбару"
 
-#: kallithea/templates/base/root.html:35
+#: kallithea/templates/base/root.html:37
 #: kallithea/templates/changeset/diff_block.html:8
 msgid "Collapse Diff"
 msgstr "Згарнуць параўнанне"
 
-#: kallithea/templates/base/root.html:36
+#: kallithea/templates/base/root.html:38
 msgid "Expand Diff"
 msgstr "Расчыніць параўнанне"
 
-#: kallithea/templates/base/root.html:37
+#: kallithea/templates/base/root.html:39
 msgid "Failed to revoke permission"
 msgstr "Не атрымалася адклікаць прывілеі"
 
-#: kallithea/templates/base/root.html:38
+#: kallithea/templates/base/root.html:40
 msgid "Confirm to revoke permission for {0}: {1} ?"
 msgstr "Пацвердзіце выдаленне прывілею для {0}: {1} ?"
 
-#: kallithea/templates/base/root.html:39
+#: kallithea/templates/base/root.html:41
 msgid "enabled"
 msgstr "уключана"
 
-#: kallithea/templates/base/root.html:40
+#: kallithea/templates/base/root.html:42
 msgid "disabled"
 msgstr "адключана"
 
-#: kallithea/templates/base/root.html:42
+#: kallithea/templates/base/root.html:44
 msgid "Specify changeset"
 msgstr "Абраць набор змен"
 
@@ -4892,7 +4922,7 @@ msgid "Commit Message"
 msgstr ""
 
 #: kallithea/templates/changelog/changelog_summary_data.html:9
-#: kallithea/templates/pullrequests/pullrequest_data.html:17
+#: kallithea/templates/pullrequests/pullrequest_data.html:23
 msgid "Age"
 msgstr "Узрост"
 
@@ -4933,7 +4963,7 @@ msgid "Child rev."
 msgstr ""
 
 #: kallithea/templates/changeset/changeset.html:50
-#: kallithea/templates/changeset/changeset_file_comment.html:37
+#: kallithea/templates/changeset/changeset_file_comment.html:42
 #: kallithea/templates/changeset/changeset_range.html:48
 msgid "Changeset status"
 msgstr "Статут змен"
@@ -4980,7 +5010,7 @@ msgstr "Створана"
 
 #: kallithea/templates/changeset/changeset.html:166
 #: kallithea/templates/compare/compare_diff.html:54
-#: kallithea/templates/pullrequests/pullrequest_show.html:318
+#: kallithea/templates/pullrequests/pullrequest_show.html:325
 #, python-format
 msgid "%s file changed"
 msgid_plural "%s files changed"
@@ -4990,7 +5020,7 @@ msgstr[2] "%s файла зменена"
 
 #: kallithea/templates/changeset/changeset.html:168
 #: kallithea/templates/compare/compare_diff.html:56
-#: kallithea/templates/pullrequests/pullrequest_show.html:320
+#: kallithea/templates/pullrequests/pullrequest_show.html:327
 #, python-format
 msgid "%s file changed with %s insertions and %s deletions"
 msgid_plural "%s files changed with %s insertions and %s deletions"
@@ -5000,8 +5030,8 @@ msgstr[2] "%s файлаў зменена: %s даданняў, %s выдале�
 
 #: kallithea/templates/changeset/changeset.html:182
 #: kallithea/templates/changeset/changeset.html:195
-#: kallithea/templates/pullrequests/pullrequest_show.html:339
-#: kallithea/templates/pullrequests/pullrequest_show.html:363
+#: kallithea/templates/pullrequests/pullrequest_show.html:346
+#: kallithea/templates/pullrequests/pullrequest_show.html:370
 msgid "Show full diff anyway"
 msgstr "Паказаць поўны diff"
 
@@ -5025,63 +5055,67 @@ msgstr "Няма загалоўка"
 msgid "on this changeset"
 msgstr "Няма змен"
 
-#: kallithea/templates/changeset/changeset_file_comment.html:30
+#: kallithea/templates/changeset/changeset_file_comment.html:31
+msgid "Reply"
+msgstr ""
+
+#: kallithea/templates/changeset/changeset_file_comment.html:34
 msgid "Delete comment?"
 msgstr "Выдаліць каментар?"
 
-#: kallithea/templates/changeset/changeset_file_comment.html:37
+#: kallithea/templates/changeset/changeset_file_comment.html:42
 #, fuzzy
 msgid "Status change"
 msgstr "Апошнія змены"
 
-#: kallithea/templates/changeset/changeset_file_comment.html:59
+#: kallithea/templates/changeset/changeset_file_comment.html:64
 msgid "Commenting on line {1}."
 msgstr "Каментар да радка {1}."
 
-#: kallithea/templates/changeset/changeset_file_comment.html:60
-#: kallithea/templates/changeset/changeset_file_comment.html:148
+#: kallithea/templates/changeset/changeset_file_comment.html:65
+#: kallithea/templates/changeset/changeset_file_comment.html:153
 #, python-format
 msgid "Comments parsed using %s syntax with %s support."
 msgstr "Парсінг каментароў выкананы з выкарыстаннем сінтаксісу %s з падтрымкай %s."
 
-#: kallithea/templates/changeset/changeset_file_comment.html:62
+#: kallithea/templates/changeset/changeset_file_comment.html:67
 msgid "Use @username inside this text to notify another user"
 msgstr ""
 "Выкарыстоўвайце @імя_карыстача ў тэксце, каб адправіць абвестку пэўнаму "
 "карыстачу"
 
-#: kallithea/templates/changeset/changeset_file_comment.html:72
-#: kallithea/templates/changeset/changeset_file_comment.html:184
+#: kallithea/templates/changeset/changeset_file_comment.html:77
+#: kallithea/templates/changeset/changeset_file_comment.html:189
 msgid "Comment preview"
 msgstr "Папярэдні прагляд каментара"
 
-#: kallithea/templates/changeset/changeset_file_comment.html:77
+#: kallithea/templates/changeset/changeset_file_comment.html:82
 msgid "Submitting ..."
 msgstr "Ужыванне..."
 
-#: kallithea/templates/changeset/changeset_file_comment.html:80
-#: kallithea/templates/changeset/changeset_file_comment.html:190
+#: kallithea/templates/changeset/changeset_file_comment.html:85
+#: kallithea/templates/changeset/changeset_file_comment.html:195
 msgid "Comment"
 msgstr "Каментаваць"
 
-#: kallithea/templates/changeset/changeset_file_comment.html:82
-#: kallithea/templates/changeset/changeset_file_comment.html:191
+#: kallithea/templates/changeset/changeset_file_comment.html:87
+#: kallithea/templates/changeset/changeset_file_comment.html:196
 msgid "Preview"
 msgstr "Прадпрагляд"
 
-#: kallithea/templates/changeset/changeset_file_comment.html:90
+#: kallithea/templates/changeset/changeset_file_comment.html:95
 msgid "You need to be logged in to comment."
 msgstr "Вам неабходна аўтарызавацца, каб пакідаць каментары."
 
-#: kallithea/templates/changeset/changeset_file_comment.html:90
+#: kallithea/templates/changeset/changeset_file_comment.html:95
 msgid "Login now"
 msgstr "Аўтарызавацца цяпер"
 
-#: kallithea/templates/changeset/changeset_file_comment.html:94
+#: kallithea/templates/changeset/changeset_file_comment.html:99
 msgid "Hide"
 msgstr "Схаваць"
 
-#: kallithea/templates/changeset/changeset_file_comment.html:106
+#: kallithea/templates/changeset/changeset_file_comment.html:111
 #, python-format
 msgid "%d comment"
 msgid_plural "%d comments"
@@ -5089,7 +5123,7 @@ msgstr[0] "%d каментар"
 msgstr[1] "%d каментара"
 msgstr[2] "%d каментароў"
 
-#: kallithea/templates/changeset/changeset_file_comment.html:107
+#: kallithea/templates/changeset/changeset_file_comment.html:112
 #, python-format
 msgid "%d inline"
 msgid_plural "%d inline"
@@ -5097,7 +5131,7 @@ msgstr[0] "%d да радка"
 msgstr[1] "%d да радкоў"
 msgstr[2] "%d да радкоў"
 
-#: kallithea/templates/changeset/changeset_file_comment.html:108
+#: kallithea/templates/changeset/changeset_file_comment.html:113
 #, python-format
 msgid "%d general"
 msgid_plural "%d general"
@@ -5105,26 +5139,26 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: kallithea/templates/changeset/changeset_file_comment.html:150
+#: kallithea/templates/changeset/changeset_file_comment.html:155
 #, fuzzy
 msgid "Use @username inside this text to notify another user."
 msgstr ""
 "Выкарыстоўвайце @імя_карыстача ў тэксце, каб адправіць абвестку пэўнаму "
 "карыстачу"
 
-#: kallithea/templates/changeset/changeset_file_comment.html:157
+#: kallithea/templates/changeset/changeset_file_comment.html:162
 msgid "Vote for pull request status"
 msgstr ""
 
-#: kallithea/templates/changeset/changeset_file_comment.html:159
+#: kallithea/templates/changeset/changeset_file_comment.html:164
 msgid "Set changeset status"
 msgstr "Змяніць статус рэвізіі"
 
-#: kallithea/templates/changeset/changeset_file_comment.html:163
+#: kallithea/templates/changeset/changeset_file_comment.html:168
 msgid "No change"
 msgstr "Без змен"
 
-#: kallithea/templates/changeset/changeset_file_comment.html:176
+#: kallithea/templates/changeset/changeset_file_comment.html:181
 msgid "Close"
 msgstr "Зачыніць"
 
@@ -5185,7 +5219,7 @@ msgid "Show merge diff"
 msgstr "Паказаць merge diff"
 
 #: kallithea/templates/compare/compare_cs.html:86
-#: kallithea/templates/pullrequests/pullrequest_show.html:310
+#: kallithea/templates/pullrequests/pullrequest_show.html:317
 msgid "Common ancestor"
 msgstr "Агульны продак"
 
@@ -5226,7 +5260,7 @@ msgid "Compare revisions, branches, bookmarks, or tags."
 msgstr ""
 
 #: kallithea/templates/compare/compare_diff.html:47
-#: kallithea/templates/pullrequests/pullrequest_show.html:305
+#: kallithea/templates/pullrequests/pullrequest_show.html:312
 #, python-format
 msgid "Showing %s commit"
 msgid_plural "Showing %s commits"
@@ -5639,7 +5673,7 @@ msgid "New Pull Request"
 msgstr "Новы pull-запыт"
 
 #: kallithea/templates/pullrequests/pullrequest.html:31
-#: kallithea/templates/pullrequests/pullrequest_data.html:15
+#: kallithea/templates/pullrequests/pullrequest_data.html:19
 #: kallithea/templates/pullrequests/pullrequest_show.html:29
 #: kallithea/templates/pullrequests/pullrequest_show.html:54
 msgid "Title"
@@ -5670,47 +5704,65 @@ msgstr "Рэпазітар прызначэння"
 msgid "No entries"
 msgstr "Запісы отсуствуют"
 
-#: kallithea/templates/pullrequests/pullrequest_data.html:14
+#: kallithea/templates/pullrequests/pullrequest_data.html:15
+#, fuzzy
+#| msgid "Default"
+msgid "Result"
+msgstr "па змаўчанні"
+
+#: kallithea/templates/pullrequests/pullrequest_data.html:17
 #, fuzzy
 msgid "Vote"
 msgstr "адклікаць"
 
-#: kallithea/templates/pullrequests/pullrequest_data.html:18
+#: kallithea/templates/pullrequests/pullrequest_data.html:24
 msgid "From"
 msgstr "Ад"
 
-#: kallithea/templates/pullrequests/pullrequest_data.html:19
+#: kallithea/templates/pullrequests/pullrequest_data.html:25
 msgid "To"
 msgstr "Да"
 
-#: kallithea/templates/pullrequests/pullrequest_data.html:28
+#: kallithea/templates/pullrequests/pullrequest_data.html:34
+#, fuzzy, python-format
+#| msgid "You voted: %s"
+msgid "Current Vote: %s"
+msgstr "Вы прагаласавалі: %s"
+
+#: kallithea/templates/pullrequests/pullrequest_data.html:35
+#, fuzzy, python-format
+#| msgid "You voted: %s"
+msgid "No votes"
+msgstr "Вы прагаласавалі: %s"
+
+#: kallithea/templates/pullrequests/pullrequest_data.html:38
 #, python-format
 msgid "You voted: %s"
 msgstr "Вы прагаласавалі: %s"
 
-#: kallithea/templates/pullrequests/pullrequest_data.html:30
+#: kallithea/templates/pullrequests/pullrequest_data.html:39
 msgid "You didn't vote"
 msgstr "Вы не галасавалі"
 
-#: kallithea/templates/pullrequests/pullrequest_data.html:35
+#: kallithea/templates/pullrequests/pullrequest_data.html:49
 msgid "(no title)"
 msgstr "(няма загалоўка)"
 
-#: kallithea/templates/pullrequests/pullrequest_data.html:37
+#: kallithea/templates/pullrequests/pullrequest_data.html:51
 #: kallithea/templates/pullrequests/pullrequest_show.html:31
 #: kallithea/templates/pullrequests/pullrequest_show.html:83
 msgid "Closed"
 msgstr "Зачынена"
 
-#: kallithea/templates/pullrequests/pullrequest_data.html:67
+#: kallithea/templates/pullrequests/pullrequest_data.html:83
 msgid "Delete Pull Request"
 msgstr "Выдаліць pull-запыт"
 
-#: kallithea/templates/pullrequests/pullrequest_data.html:68
+#: kallithea/templates/pullrequests/pullrequest_data.html:84
 msgid "Confirm to delete this pull request"
 msgstr "Пацвердзіце выдаленне гэтага pull-request'а"
 
-#: kallithea/templates/pullrequests/pullrequest_data.html:70
+#: kallithea/templates/pullrequests/pullrequest_data.html:86
 #, fuzzy, python-format
 msgid "Confirm again to delete this pull request with %s comments"
 msgstr "Пацвердзіце выдаленне гэтага pull-request'а"
@@ -5788,39 +5840,39 @@ msgstr "Абнавіць"
 msgid "Current revision - no change"
 msgstr ""
 
-#: kallithea/templates/pullrequests/pullrequest_show.html:213
+#: kallithea/templates/pullrequests/pullrequest_show.html:220
 msgid "Pull Request Reviewers"
 msgstr "Рэцэнзенты pull-запытаў"
 
-#: kallithea/templates/pullrequests/pullrequest_show.html:238
+#: kallithea/templates/pullrequests/pullrequest_show.html:245
 msgid "Remove reviewer"
 msgstr "Выдаліць рэцэнзента"
 
-#: kallithea/templates/pullrequests/pullrequest_show.html:250
+#: kallithea/templates/pullrequests/pullrequest_show.html:257
 msgid "Type name of reviewer to add"
 msgstr ""
 
-#: kallithea/templates/pullrequests/pullrequest_show.html:258
+#: kallithea/templates/pullrequests/pullrequest_show.html:265
 msgid "Potential Reviewers"
 msgstr "Патэнцыйныя рэцэнзенты"
 
-#: kallithea/templates/pullrequests/pullrequest_show.html:261
+#: kallithea/templates/pullrequests/pullrequest_show.html:268
 msgid "Click to add the repository owner as reviewer:"
 msgstr ""
 
-#: kallithea/templates/pullrequests/pullrequest_show.html:284
+#: kallithea/templates/pullrequests/pullrequest_show.html:291
 msgid "Save Changes"
 msgstr "Захаваць змены"
 
-#: kallithea/templates/pullrequests/pullrequest_show.html:285
+#: kallithea/templates/pullrequests/pullrequest_show.html:292
 msgid "Save as New Pull Request"
 msgstr ""
 
-#: kallithea/templates/pullrequests/pullrequest_show.html:286
+#: kallithea/templates/pullrequests/pullrequest_show.html:293
 msgid "Cancel Changes"
 msgstr "Адмяніць змены"
 
-#: kallithea/templates/pullrequests/pullrequest_show.html:296
+#: kallithea/templates/pullrequests/pullrequest_show.html:303
 msgid "Pull Request Content"
 msgstr ""
 
@@ -5831,7 +5883,6 @@ msgstr "%s Запыты на занясенне змен"
 
 #: kallithea/templates/pullrequests/pullrequest_show_all.html:11
 #, fuzzy, python-format
-#| msgid "Pull Requests from %s'"
 msgid "Pull Requests from '%s'"
 msgstr "Pull-запыты ад %s"
 
@@ -6312,4 +6363,10 @@ msgstr "Параўнаць тэгі"
 
 #~ msgid "Created by"
 #~ msgstr "Створана"
+
+#~ msgid "%s at %s"
+#~ msgstr "%s (%s)"
+
+#~ msgid "Git pull requests don't support updates yet."
+#~ msgstr "Абнаўленне pull-запытаў git не падтрымліваецца."
 
